@@ -1,31 +1,56 @@
 const searchFormData = JSON.parse(sessionStorage.getItem('search-form-data'));
-window.addEventListener('load', function () {
 
-  if (searchFormData) {
-    const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
-    const departureDate = new Date(searchFormData.departureDate);
-    const formattedDate = `${days[departureDate.getDay()]}, ${departureDate.getDate()} Tháng ${departureDate.getMonth() + 1}, ${departureDate.getFullYear()}`;
+function renderRouteInfo(data, direction) {
+  const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
 
-    const passengerCount = Number(searchFormData.adultNumber) + Number(searchFormData.childNumber) + Number(searchFormData.infantNumber);
+  let date;
+  let beginLocation;
+  let endLocation;
 
-    document.querySelector('.route').textContent = `${searchFormData.beginLocation.name} (${searchFormData.beginLocation.nameCode}) → ${searchFormData.endLocation.name} (${searchFormData.beginLocation.nameCode})`;
-    document.querySelector('.details div').textContent = `${formattedDate} | ${passengerCount} Hành khách`;
+  if (direction === 'departure') {
+    date = new Date(data.departureDate);
+    beginLocation = data.beginLocation;
+    endLocation = data.endLocation;
+  } else if (direction === 'return') {
+    date = new Date(data.returnDate);
+    beginLocation = data.endLocation;
+    endLocation = data.beginLocation;
+  } else {
+    console.error('Direction must be "departure" or "return"');
+    return;
   }
+
+  const formattedDate = `${days[date.getDay()]}, ${date.getDate()} Tháng ${date.getMonth() + 1}, ${date.getFullYear()}`;
+  const passengerCount = Number(data.adultNumber) + Number(data.childNumber) + Number(data.infantNumber);
+
+  document.querySelector('.route').textContent = `${beginLocation.name} (${beginLocation.nameCode}) → ${endLocation.name} (${endLocation.nameCode})`;
+  document.querySelector('.details div').textContent = `${formattedDate} | ${passengerCount} Hành khách`;
 }
-)
 
 
 window.addEventListener('load', async function selectFightHandleChange() {
 
+    //set thông báo biển hiệu
+  if (searchFormData) {
+    renderRouteInfo(searchFormData, 'departure'); // Chiều đi
+  }
   await loadDataForCard(searchFormData.beginLocation.id, searchFormData.endLocation.id, searchFormData.departureDate);
   let departureFlightASeat = await selectFlight();
   let returnFlightASeat = null
   if (searchFormData.isRoundTrip) {
+    //set thông báo chọn chuyến về
+    window.scrollTo(0, 0);
+    if (searchFormData) {
+      renderRouteInfo(searchFormData, 'return'); // chiều về
+    }
     //truyền lại các giá trị mới
-    await loadDataForCard(searchFormData.beginLocation.id, searchFormData.endLocation.id, searchFormData.returnDate);
-    returnFlightASeat = await selectFight();
+    await loadDataForCard(searchFormData.endLocation.id,searchFormData.beginLocation.id, searchFormData.returnDate);
+    returnFlightASeat = await selectFlight();
   }
   sessionStorage.setItem('customerSelectedFight', JSON.stringify({ departureFlightASeat, returnFlightASeat }))
+
+  // todo: 
+
 })
 function selectFlight() {
   return new Promise((resolve) => {

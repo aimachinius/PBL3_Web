@@ -26,5 +26,4 @@ public interface CustomerRepo extends JpaRepository<Customer, Integer> {
     List<Customer> findByEmail(String email);
 
     List<Customer> findByCountry(String address);
-
 }

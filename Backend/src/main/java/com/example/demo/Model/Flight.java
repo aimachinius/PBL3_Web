@@ -20,13 +20,11 @@ public class Flight {
     private int idFlight;
 
     @ManyToOne
-    @JoinColumn(name = "Id_Plane")
-    @JsonIgnore
+    @JoinColumn(name = "Id_Plane",referencedColumnName = "Id_Plane",nullable = false)
     private Plane plane;
 
     @Column(name = "Current_Seat")
     private int currentSeat;
-
     // Dùng Timestamp thay cho chuỗi ngày/giờ
     @Column(name = "Departure_Date")
     private Date departureDate;
@@ -37,11 +35,13 @@ public class Flight {
     @Column(name = "Estimated_Arrival_Time")
     private Time estimatedArrivalTime;
 
-    @Column(name = "F_R_O_M")
-    private String fromLocation;
+    @ManyToOne
+    @JoinColumn(name = "F_R_O_M",referencedColumnName = "id",nullable = false)
+    private Location fromLocation;
 
-    @Column(name = "T_O")
-    private String toLocation;
+    @ManyToOne
+    @JoinColumn(name = "T_O",referencedColumnName = "id",nullable = false)
+    private Location toLocation;
 
     private Timestamp createdAt;
 
@@ -49,7 +49,7 @@ public class Flight {
     }
 
     public Flight(Plane plane, int currentSeat, Date departureDate, Time departureTime,
-            Date arrivalDate, Time estimatedArrivalTime, String fromLocation, String toLocation) {
+            Date arrivalDate, Time estimatedArrivalTime, Location fromLocation, Location toLocation) {
         this.plane = plane;
         this.currentSeat = currentSeat;
         this.departureDate = departureDate;
@@ -62,7 +62,7 @@ public class Flight {
     }
 
     public Flight(int idFlight, Plane plane, int currentSeat, Date departureDate, Time departureTime,
-            Date arrivalDate, Time estimatedArrivalTime, String fromLocation, String toLocation) {
+            Date arrivalDate, Time estimatedArrivalTime, Location fromLocation, Location toLocation) {
         this.idFlight = idFlight;
         this.plane = plane;
         this.currentSeat = currentSeat;
@@ -95,17 +95,6 @@ public class Flight {
         return idFlight;
     }
 
-    public List<String> valueString() {
-        List<String> value = new ArrayList<>();
-        value.add(plane != null ? String.valueOf(plane.getIdPlane()) : "null");
-        value.add(String.valueOf(currentSeat));
-        value.add(departureTime != null ? departureTime.toString() : "null");
-        value.add(estimatedArrivalTime != null ? estimatedArrivalTime.toString() : "null");
-        value.add(fromLocation);
-        value.add(toLocation);
-        value.add(createdAt != null ? createdAt.toString() : "null");
-        return value;
-    }
 
     public int getIdFlight() {
         return idFlight;
@@ -147,19 +136,19 @@ public class Flight {
         this.estimatedArrivalTime = estimatedArrivalTime;
     }
 
-    public String getFromLocation() {
+    public Location getFromLocation() {
         return fromLocation;
     }
 
-    public void setFromLocation(String fromLocation) {
+    public void setFromLocation(Location fromLocation) {
         this.fromLocation = fromLocation;
     }
 
-    public String getToLocation() {
+    public Location getToLocation() {
         return toLocation;
     }
 
-    public void setToLocation(String toLocation) {
+    public void setToLocation(Location toLocation) {
         this.toLocation = toLocation;
     }
 

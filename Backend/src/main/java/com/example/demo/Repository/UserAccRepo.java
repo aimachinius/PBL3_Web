@@ -12,5 +12,5 @@ public interface UserAccRepo extends JpaRepository<UserAccount, Integer> {
 
     UserAccount findByUsernameAndPassword(String username, String password);
 
-    UserAccount findByCustommer(Customer custommer);
+//    UserAccount findByCustomer(Customer customer);
 }

@@ -1,6 +1,7 @@
 package com.example.demo.Service;
 
 import com.example.demo.Model.Flight;
+import com.example.demo.Model.Location;
 import com.example.demo.Repository.FlightRepo;
 import java.sql.Date;
 import java.util.List;
@@ -48,12 +49,12 @@ public class FlightService {
         }
     }
 
-    public List<Flight> getFlightByFromAndTo(String fromLocation, String toLocation) {
-        return flightRepo.findByFromLocationAndToLocation(fromLocation, toLocation);
-    }
+//    public List<Flight> getFlightByFromAndTo(String fromLocation, String toLocation) {
+//        return flightRepo.findByFromLocationAndToLocation(fromLocation, toLocation);
+//    }
 
-    public List<Flight> getFlightByFromAndToAndDepartureDate(String fromLocation, String toLocation,
-            Date departureDate) {
+    public List<Flight> getFlightByFromAndToAndDepartureDate(Location fromLocation, Location toLocation,
+                                                             Date departureDate) {
         return flightRepo.findByFromLocationAndToLocationAndDepartureDate(fromLocation, toLocation, departureDate);
     }
 
