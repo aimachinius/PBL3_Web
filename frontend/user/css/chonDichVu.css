@@ -1,0 +1,286 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.section {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.section-title {
+  color: #006064;
+  font-size: 22px;
+  font-weight: 600;
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.section-content {
+  padding: 20px;
+}
+
+.flight-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.flight-route {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.flight-date {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.flight-times {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.time {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.airport-code {
+  margin-top: 5px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.airport-terminal {
+  font-size: 14px;
+  color: #666;
+}
+
+.flight-dotted-line {
+  flex-grow: 1;
+  height: 2px;
+  border-top: 2px dotted #ccc;
+  margin: 0 15px;
+  position: relative;
+}
+
+.flight-dotted-line::after {
+  content: '→';
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  font-size: 18px;
+  color: #006064;
+}
+
+.flight-details {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.flight-detail-item {
+  margin-right: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.flight-detail-item i {
+  margin-right: 5px;
+  color: #006064;
+}
+
+.passenger-info {
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.passenger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.passenger-name {
+  font-size: 18px;
+  font-weight: 500;
+  color: #006064;
+}
+
+.passenger-type {
+  font-size: 14px;
+  color: #666;
+}
+
+.passenger-contact {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.luggage-info {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.luggage-summary {
+  flex-grow: 1;
+}
+
+.add-service {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.service-image {
+  width: 150px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-left: 20px;
+}
+
+.service-content {
+  flex-grow: 1;
+}
+
+.service-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.service-description {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.service-included {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f5b335;
+  color: #333;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid #f5b335;
+}
+
+.btn:hover {
+  background-color: #e6a012;
+}
+
+.price-info {
+  text-align: right;
+  padding: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.price-title {
+  font-size: 18px;
+  color: #006064;
+  margin-bottom: 5px;
+}
+
+.price-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: #006064;
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  color: #006064;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 0 10px;
+}
+
+.airline-logo {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+  .flight-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .flight-times {
+    width: 100%;
+  }
+  
+  .flight-detail-item {
+    margin-right: 10px;
+  }
+  
+  .passenger {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .luggage-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .service-image {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+  
+  .add-service {
+    flex-direction: column;
+  }
+}

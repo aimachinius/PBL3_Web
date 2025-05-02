@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vietnam Airlines - Đặt vé máy bay</title>
+  <link rel="stylesheet" href="css/nhapThongTin.css">
+</head>
+
+<body>
+  <!-- hiển thị thông tin về chuyêns bay -->
+  <div class="flight-info">
+  </div>
+
+  <form action="">
+
+    <div class="customer-form">
+
+    </div>
+
+    <div class="container-form">
+      <h2 class="section-title">Thông tin liên lạc</h2>
+      <p class="form-hint">Thông tin liên lạc này được sử dụng để xử lý và lưu đặt chỗ này.</p>
+      <div class="form-row">
+        <label class="form-label required">Địa chỉ email bắt buộc</label>
+        <input type="email" class="form-input" placeholder="example@email.com" required>
+      </div>
+      <div class="two-columns">
+        <div class="column">
+          <div class="form-row">
+            <label class="form-label required">Số điện thoại</label>
+            <input type="tel" class="form-input" placeholder="Nhập số điện thoại" required>
+          </div>
+        </div>
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="emergency-contact" required>
+        <label for="emergency-contact" class="checkbox-label">Dữ liệu cá nhân của Quý khách thu thập trên trang này được xử lý và lưu trữ cho mục đích và theo điều kiện đã được công bố tại Chính sách bảo mật thông tin của chúng tôi.</label>
+      </div>
+    </div>
+
+    <div class="container-form" id="form-for-bt">
+      <div>
+        <button type="submit" class="bt-xac-nhan">
+          Xác nhận
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div data-include="share/footer.html"></div>
+
+
+  <script src="js/include.js"></script>
+  <script src="js/DOM/nhapThongTin.js"></script>
+</body>
+
+</html>

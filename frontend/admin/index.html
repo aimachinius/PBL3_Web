@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/index.css" rel="stylesheet">
+    <script type="module" src="js/index.js"></script>
+</head>
+
+<body class="bg-gray-100 flex h-screen">
+    <!-- Sidebar -->
+    <div class="w-64 bg-black text-white flex flex-col h-full">
+        <!-- Company Header -->
+        <div class="p-4 flex items-center justify-between border-b border-gray-700">
+            <div class="flex items-center">
+                <div class="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center mr-2">
+                    <i class="fas fa-wave-square text-white"></i>
+                </div>
+                <span class="font-semibold text-lg">Tailwind Labs</span>
+            </div>
+            <button class="text-gray-400">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+
+        <!-- Search and Inbox -->
+        <div class="border-b border-gray-700">
+            <div class="p-4 flex items-center text-gray-400">
+                <i class="fas fa-search mr-3"></i>
+                <span>Search</span>
+            </div>
+            <div class="p-4 flex items-center text-gray-400">
+                <i class="fas fa-inbox mr-3"></i>
+                <span>Inbox</span>
+            </div>
+        </div>
+
+        <!-- Main Navigation -->
+        <div class="flex-1 overflow-y-auto">
+            <div class="py-2">
+                <div class="px-4 py-2 flex items-center text-gray-400 hover:bg-gray-800">
+                    <i class="fas fa-home mr-3"></i>
+                    <span>Home</span>
+                </div>
+                <div onclick="setContent('planeBarBtn')" class="px-4 py-2 flex items-center text-gray-400 hover:bg-gray-800">
+                    <i class="fas fa-calendar mr-3"></i>
+                    <span>Máy bay</span>
+                </div>
+                <div  onclick="setContent('flightBarBtn')" class="px-4 py-2 flex items-center text-gray-400 hover:bg-gray-800 ">
+                    <i class="fas fa-shopping-cart mr-3"></i>
+                    <span>Chuyến bay</span>
+                </div>
+                <div class="px-4 py-2 flex items-center text-gray-400 hover:bg-gray-800">
+                    <i class="fas fa-bullhorn mr-3"></i>
+                    <span>Broadcasts</span>
+                </div>
+                <div class="px-4 py-2 flex items-center text-gray-400 hover:bg-gray-800">
+                    <i class="fas fa-cog mr-3"></i>
+                    <span>Settings</span>
+                </div>
+            </div>
+
+            <!-- Upcoming Events -->
+            <div class="mt-6">
+                <div class="px-4 pb-2 text-xs text-gray-500">
+                    Upcoming Events
+                </div>
+                <div class="px-4 py-2 text-gray-400 hover:bg-gray-800">
+                    Bear Hug: Live in Concert
+                </div>
+                <div class="px-4 py-2 text-gray-400 hover:bg-gray-800">
+                    Viking People
+                </div>
+                <div class="px-4 py-2 text-gray-400 hover:bg-gray-800">
+                    Six Fingers — DJ Set
+                </div>
+                <div class="px-4 py-2 text-gray-400 hover:bg-gray-800">
+                    We All Look The Same
+                </div>
+            </div>
+        </div>
+
+        <!-- Support
+        <div class="p-4 border-t border-gray-700 flex items-center text-gray-400">
+            <i class="fas fa-question-circle mr-3"></i>
+            <span>Support</span>
+        </div> -->
+
+
+    </div>
+
+    <!-- Main Content -->
+     
+    <div class="flex flex-1 bg-amber-300 overflow-y-auto" id="main-content">
+        <!-- Orders content would go here -->
+    </div>
+</body>
+
+</html>
