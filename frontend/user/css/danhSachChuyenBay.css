@@ -75,6 +75,7 @@
             background-color: rgb(0, 95, 111);
             padding: 40px;
             height: 100%;
+            color: wheat;
         }
         .button-card-1:hover ,.button-card-2:hover{
             cursor: pointer;

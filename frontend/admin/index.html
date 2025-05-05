@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./css/index.css" rel="stylesheet">
-    <script type="module" src="js/index.js"></script>
 </head>
 
 <body class="bg-gray-100 flex h-screen">
@@ -17,7 +16,7 @@
                 <div class="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center mr-2">
                     <i class="fas fa-wave-square text-white"></i>
                 </div>
-                <span class="font-semibold text-lg">Tailwind Labs</span>
+                <span class="font-semibold text-lg">Quản lý</span>
             </div>
             <button class="text-gray-400">
                 <i class="fas fa-chevron-down"></i>
@@ -35,7 +34,7 @@
                 <span>Inbox</span>
             </div>
         </div>
-
+        
         <!-- Main Navigation -->
         <div class="flex-1 overflow-y-auto">
             <div class="py-2">
@@ -51,14 +50,16 @@
                     <i class="fas fa-shopping-cart mr-3"></i>
                     <span>Chuyến bay</span>
                 </div>
-                <div class="px-4 py-2 flex items-center text-gray-400 hover:bg-gray-800">
-                    <i class="fas fa-bullhorn mr-3"></i>
-                    <span>Broadcasts</span>
-                </div>
-                <div class="px-4 py-2 flex items-center text-gray-400 hover:bg-gray-800">
+
+                <div  onclick="setContent('roleBarBtn')" class="px-4 py-2 flex items-center text-gray-400 hover:bg-gray-800">
                     <i class="fas fa-cog mr-3"></i>
-                    <span>Settings</span>
+                    <span>tài khoảng - role</span>
                 </div>
+                <div  onclick="setContent('accountBarBtn')" class="px-4 py-2 flex items-center text-gray-400 hover:bg-gray-800">
+                    <i class="fas fa-bullhorn mr-3"></i>
+                    <span>Tài khoảng</span>
+                </div>
+               
             </div>
 
             <!-- Upcoming Events -->
@@ -95,6 +96,7 @@
     <div class="flex flex-1 bg-amber-300 overflow-y-auto" id="main-content">
         <!-- Orders content would go here -->
     </div>
+    <script type="module" src="js/index.js"></script>
 </body>
 
 </html>

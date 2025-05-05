@@ -1,6 +1,20 @@
 {
+<<<<<<< HEAD
+  "name": "my-web",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.3.1"
+=======
   "dependencies": {
     "@tailwindcss/cli": "^4.1.4",
     "tailwindcss": "^4.1.4"
+>>>>>>> 2dce34da931009ce9494e59efd3d13a977730975
   }
 }

@@ -20,30 +20,33 @@ import java.util.List;
 @Entity
 @Table(name = "Plane")
 public class Plane {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Plane")
     private int idPlane;
     @Column(name = "Name_Plane")
     private String namePlane;
+    @Enumerated(EnumType.STRING)
     @Column(name = "Status")
-    private String status;
+    private Status status;
     @Column(name = "Flight_Hours")
     private int flightHours;
     @Column(name = "Seat_Count")
     private int seatCount;
 
     @OneToMany(mappedBy = "plane", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
     List<Seat> seats = new ArrayList<>();
+
+    @OneToMany(mappedBy = "plane", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Flight> flights;
 
     public Plane() {
     }
 
     public Plane(String namePlane, Status status, int flightHours, int seatCount) {
-        // this.idPlane = idPlane;
         this.namePlane = namePlane;
-        this.status = status.toString();
+        this.status = status;
         this.flightHours = flightHours;
         this.seatCount = seatCount;
     }
@@ -51,7 +54,7 @@ public class Plane {
     public Plane(int idPlane, String namePlane, Status status, int flightHours, int seatCount) {
         this.idPlane = idPlane;
         this.namePlane = namePlane;
-        this.status = status.toString();
+        this.status = status;
         this.flightHours = flightHours;
         this.seatCount = seatCount;
     }
@@ -94,11 +97,11 @@ public class Plane {
     }
 
     public Status getStatus() {
-        return Status.valueOf(status);
+        return status;
     }
 
     public void setStatus(Status status) {
-        this.status = status.toString();
+        this.status = status;
     }
 
     public int getFlightHours() {

@@ -77,18 +77,28 @@ async function loadDataForCard(fromLocationId, toLocationId, departureDate) {
   container.innerHTML = '';
 
   data.forEach(f => {
+    const fullDateTimeString = `${f.departureDate}T${f.departureTime}`; // "2025-05-15T14:36:00"
+    const departure = new Date(fullDateTimeString);
+    let   arrival = null;
+    if (!isNaN(departure.getTime())) {
+      arrival = new Date(departure.getTime() + f.durationMinutes * 60000);
+      console.log("Arrival time:", arrival.toISOString());
+    } else {
+      console.error("Thời gian không hợp lệ:", fullDateTimeString);
+    }
+
     const card = document.createElement('div');
     card.dataset.flight = JSON.stringify(f);
     card.className = 'flight-card';
     card.innerHTML = `
         <div class="flight-info">
-          <div class="airline-logo">${f.airline}</div>
+          <div class="airline-logo">${f.plane.namePlane}</div>
           <div class="flight-times">
             <div class="time">${f.departureTime}</div>
             <div class="airport">${f.fromLocation.nameCode}</div>
           </div>
           <div class="flight-times">
-            <div class="time">${f.estimatedArrivalTime}</div>
+            <div class="time">${arrival.toTimeString().split(' ')[0]}</div>
             <div class="airport">${f.toLocation.nameCode}</div>
           </div>
         </div>
@@ -98,14 +108,14 @@ async function loadDataForCard(fromLocationId, toLocationId, departureDate) {
         <div class="button-card-1" stylebutton="buttonCard" styleSeat="common">
           <div class="price">
             <p>PHỔ THÔNG</p>
-            <div class="price-amount">${f.priceEconomy}</div>
+            <div class="price-amount">${f.commonFare}</div>
             <p>VND</p>
           </div>
         </div>
         <div class="button-card-2" stylebutton="buttonCard" styleSeat="vip">
           <div class="price">
             <p>THƯƠNG GIA</p>
-            <div class="price-amount">${f.priceBusiness}</div>
+            <div class="price-amount">${f.vipFare}</div>
             <p>VND</p>
           </div>
         </div>

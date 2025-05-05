@@ -1,20 +1,16 @@
 package com.example.demo.Service;
 
-import java.lang.ProcessBuilder.Redirect;
-
+import com.example.demo.Model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.Account.UserAccount;
 import com.example.demo.Repository.UserAccRepo;
-
-import jakarta.servlet.http.HttpSession;
 
 @Service
 public class UserAccService {
     @Autowired
     UserAccRepo userAccRepo;
-
+ 
     public UserAccService() {
     }
 
@@ -23,7 +19,7 @@ public class UserAccService {
     }
 
     public int Login(String username, String password) {
-        UserAccount userAccount = userAccRepo.findByUsernameAndPassword(username, password);
+        Account userAccount = userAccRepo.findByUsernameAndPassword(username, password);
         if (userAccount != null) {
             if (userAccount.getRole().equals("admin")) {
                 return 1; // Admin
@@ -42,7 +38,7 @@ public class UserAccService {
     // session.setAttribute("Role", "admin");
     // return true;
     // } else {
-    // UserAccount userAccount = userAccRepo.findByUsernameAndPassword(username,
+    // Account userAccount = userAccRepo.findByUsernameAndPassword(username,
     // password);
     // if (userAccount != null) {
     // session.setAttribute("Role", "user");

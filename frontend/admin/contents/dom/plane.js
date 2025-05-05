@@ -4,13 +4,14 @@ import {
     addPlane,
     updatePlane,
     deletePlane
-} from '../../../APIs/admin/plane.js';
+} from '../../../APIs/plane.js';
 
 let selectedPlane;
 
 
 
-export default async function loadFlightJS() {
+const planeFormContainer = document.getElementById("plane-form-container");
+export default async function loadPlane() {
     selectedPlane = null;
     const addPlaneBtn = document.getElementById("add-plane-btn");
     const editPlaneBtn = document.getElementById("edit-plane-btn");
@@ -91,7 +92,6 @@ async function handelCUSubmit(e) {
     }
     loadPlanForTable(await getAllPlanes());
     console.log(selectedPlane);
-    console.log(plane);
 }
 
 

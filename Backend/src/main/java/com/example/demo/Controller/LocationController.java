@@ -13,15 +13,10 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/shared")
-public class SharedControler {
-    @Autowired
-    private FlightService flightService;
-
+@RequestMapping("/location")
+public class LocationController {
     @Autowired
     LocationRepo locationRepo;
-
-
 
     @GetMapping("/all_location")
     public List<Location> allLocation() {

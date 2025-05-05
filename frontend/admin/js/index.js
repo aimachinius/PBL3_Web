@@ -1,7 +1,9 @@
-import loadPlane from '../contents/js/plane.js';
-import loadFlightJS from '../contents/js/flight.js';
+import loadPlane from '../contents/dom/plane.js';
+import loadFlightJS from '../contents/dom/flight.js';
+import loadAccountView from '../contents/dom/accountView.js';
+import loadRoleView from '../contents/dom/roleView.js';
 
-const contentsPath = {
+const barButtons = {
     planeBarBtn: {
         html: 'contents/plane.html',
         jsFunction: loadPlane
@@ -10,15 +12,23 @@ const contentsPath = {
         html: 'contents/flight.html',
         jsFunction: loadFlightJS
 
+    },
+    accountBarBtn:{
+        html: 'contents/accountView.html',
+        jsFunction: loadAccountView,
+    },
+    roleBarBtn:{
+        html: 'contents/roleView.html',
+        jsFunction: loadRoleView,
     }
 }
 
 
 async function setContent(key) {
     const mainContent = document.getElementById('main-content');
-    mainContent.innerHTML = await getHTMLFromFile(contentsPath[key].html);
+    mainContent.innerHTML = await getHTMLFromFile(barButtons[key].html);
     //load js
-    contentsPath[key].jsFunction();
+    barButtons[key].jsFunction();
 }
 
 
@@ -28,7 +38,7 @@ async function getHTMLFromFile(filePath) {
 
 }
 window.addEventListener('load', () => {
-    setContent('flight');
+    setContent('planeBarBtn');
 })
 window.setContent = setContent;
 

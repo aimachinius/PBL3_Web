@@ -1,9 +1,9 @@
-import {BASE_URL} from "../init.js"
-const API_BASE = BASE_URL + 'admin/planes';
+import {BASE_URL} from "./init.js"
+const API_BASE = BASE_URL + '/plane';
 
 // Lấy danh sách tất cả máy bay
 export async function getAllPlanes() {
-    const res = await fetch(API_BASE);
+    const res = await fetch(API_BASE + '/all_plane');
     return await res.json();
 }
 

@@ -13,63 +13,63 @@ import com.example.demo.Enum.SeatStatus;
 
 @Entity
 @Table(name = "Flights_Seat")
-@IdClass(Flights_Seat.class)
+@IdClass(Flights_Seat_Id.class)
 public class Flights_Seat {
 
     @Id
     @ManyToOne
     @JoinColumn(name = "Id_Flight")
-    private Flight idFlight;
+    private Flight flight;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "Id_Seat")
-    private Seat idSeat;
+    private Seat seat;
 
     @Column(name = "Seat_Status")
-    private String seatStatus;
+    private SeatStatus seatStatus;
 
     public Flights_Seat() {
     }
 
     public Flights_Seat(Flight flight, Seat seat, SeatStatus seatStatus) {
-        this.idFlight = flight;
-        this.idSeat = seat;
-        this.seatStatus = seatStatus.toString();
+        this.flight = flight;
+        this.seat = seat;
+        this.seatStatus = seatStatus;
     }
 
     public Flights_Seat(Flight flight, Seat seat) {
-        this.idFlight = flight;
-        this.idSeat = seat;
+        this.flight = flight;
+        this.seat = seat;
         // this.seatStatus = seatStatus;
     }
 
     public Flight getKey() {
-        return idFlight;
+        return flight;
     }
 
     public Flight getFlight() {
-        return idFlight;
+        return flight;
     }
 
     public void setFlight(Flight flight) {
-        this.idFlight = flight;
+        this.flight = flight;
     }
 
     public Seat getSeat() {
-        return idSeat;
+        return seat;
     }
 
     public void setSeat(Seat seat) {
-        this.idSeat = seat;
+        this.seat = seat;
     }
 
     public SeatStatus getSeatStatus() {
-        return SeatStatus.valueOf(seatStatus);
+        return seatStatus;
     }
 
     public void setSeatStatus(SeatStatus seatStatus) {
-        this.seatStatus = seatStatus.toString();
+        this.seatStatus = seatStatus;
     }
 
     @Override
@@ -79,20 +79,20 @@ public class Flights_Seat {
         if (!(o instanceof Flights_Seat))
             return false;
         Flights_Seat that = (Flights_Seat) o;
-        return Objects.equals(idFlight, that.idFlight) &&
-                Objects.equals(idSeat, that.idSeat);
+        return Objects.equals(flight, that.flight) &&
+                Objects.equals(seat, that.seat);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idFlight, idSeat);
+        return Objects.hash(flight, seat);
     }
 
     @Override
     public String toString() {
         return "Flights_Seat{" +
-                "flight=" + idFlight +
-                ", seat=" + idSeat +
+                "flight=" + flight +
+                ", seat=" + seat +
                 ", seatStatus='" + seatStatus + '\'' +
                 '}';
     }

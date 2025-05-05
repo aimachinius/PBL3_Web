@@ -47,20 +47,20 @@ public class CustomerService {
     }
 
     public void addCustomer(Customer customer) { // Nếu tồn tài thì không add
-        if (!customerRepo.existsById(customer.getIdCard())) {
+        if (!customerRepo.existsById(customer.getIdCustomer())) {
             customerRepo.save(customer);
         }
     }
 
-    public void updateCustomer(Customer customer) {
-        if (customerRepo.existsById(customer.getIdCard())) {
-            Customer exist = customerRepo.findByIdCard(customer.getIdCard());
-            exist.Copy(customer);
-            customerRepo.save(exist);
-        } else {
-            addCustomer(customer);
-        }
-    }
+//    public void updateCustomer(Customer customer) {
+//        if (customerRepo.existsById(customer.getIdCustomer())) {
+//            Customer exist = customerRepo.findByIdCard(customer.getIdCustomer());
+//            exist.Copy(customer);
+//            customerRepo.save(exist);
+//        } else {
+//            addCustomer(customer);
+//        }
+//    }
 
     public void addCustomerToTicket(Customer customer) {
         // Thêm vào vé

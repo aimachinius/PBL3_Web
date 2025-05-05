@@ -23,20 +23,20 @@ public class Flights_SeatService {
     public List<Flights_Seat> getAllFlight_Seat() {
         return flight_seatRepo.findAll();
     }
-
-    public Flights_Seat getByIdFlightsAndIdSeat(int flightId, int seatId) {
-        return flight_seatRepo.findByIdFlightAndIdSeat(flightId, seatId);
-    }
-
-    public List<Flights_Seat> getFlights_SeatByFlightId(int flightId) {
-        return flight_seatRepo.findByIdFlight(flightId);
-    }
-
-    public void addFlight_Seat(Flight flight, Seat seat) {
-        Flights_Seat flight_seat = new Flights_Seat(flight, seat, SeatStatus.BOOKED);
-        if (flight_seatRepo.findByIdFlightAndIdSeat(flight_seat.getSeat().getIdSeat(),
-                flight_seat.getFlight().getIdFlight()) == null) {
-            flight_seatRepo.save(flight_seat);
-        }
-    }
+//
+//    public Flights_Seat getByIdFlightsAndIdSeat(int flightId, int seatId) {
+//        return flight_seatRepo.findByIdFlightAndIdSeat(flightId, seatId);
+//    }
+//
+//    public List<Flights_Seat> getFlights_SeatByFlightId(int flightId) {
+//        return flight_seatRepo.findByIdFlight(flightId);
+//    }
+//
+//    public void addFlight_Seat(Flight flight, Seat seat) {
+//        Flights_Seat flight_seat = new Flights_Seat(flight, seat, SeatStatus.BOOKED);
+//        if (flight_seatRepo.findByIdFlightAndIdSeat(flight_seat.getSeat().getIdSeat(),
+//                flight_seat.getFlight().getIdFlight()) == null) {
+//            flight_seatRepo.save(flight_seat);
+//        }
+//    }
 }

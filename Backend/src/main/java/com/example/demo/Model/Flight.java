@@ -1,16 +1,16 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idFlight")
 @Table(name = "Flights")
 public class Flight {
 
@@ -23,56 +23,95 @@ public class Flight {
     @JoinColumn(name = "Id_Plane",referencedColumnName = "Id_Plane",nullable = false)
     private Plane plane;
 
-    @Column(name = "Current_Seat")
-    private int currentSeat;
-    // Dùng Timestamp thay cho chuỗi ngày/giờ
-    @Column(name = "Departure_Date")
+    @Column(name = "Departure_Date",nullable = false)
     private Date departureDate;
-    @Column(name = "Departure_Time")
+    @Column(name = "Departure_Time",nullable = false)
     private Time departureTime;
-    @Column(name = "Arrival_Date")
-    private Date arrivalDate;
-    @Column(name = "Estimated_Arrival_Time")
-    private Time estimatedArrivalTime;
+    @Column(name = "Duration_Minutes")
+    private Long durationMinutes;
+    @Column(name="common_fare",nullable = false)
+    private  Long commonFare;
+    @Column(name="vip_fare", nullable = false)
+    private Long vipFare;
 
     @ManyToOne
     @JoinColumn(name = "F_R_O_M",referencedColumnName = "id",nullable = false)
     private Location fromLocation;
-
     @ManyToOne
     @JoinColumn(name = "T_O",referencedColumnName = "id",nullable = false)
     private Location toLocation;
 
+    @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Flights_Seat> flightsSeatList;
+
+    @OneToMany(mappedBy = "flightReturn", cascade = CascadeType.ALL,orphanRemoval = true)
+    private  List<Ticket> boughtTicket;
+
+
+    public List<Ticket> getBoughtTicket() {
+        return boughtTicket;
+    }
+
+    public void setBoughtTicket(List<Ticket> boughtTicket) {
+        this.boughtTicket = boughtTicket;
+    }
+
     private Timestamp createdAt;
+
+
+    public long getCommonFare() {
+        return commonFare;
+    }
+
+    public void setCommonFare(long commonFare) {
+        this.commonFare = commonFare;
+    }
+
+    public long getVipFare() {
+        return vipFare;
+    }
+
+    public void setVipFare(long vipFare) {
+        this.vipFare = vipFare;
+    }
+
+
+    public void setCommonFare(Long commonFare) {
+        this.commonFare = commonFare;
+    }
+
+    public void setVipFare(Long vipFare) {
+        this.vipFare = vipFare;
+    }
 
     public Flight() {
     }
 
-    public Flight(Plane plane, int currentSeat, Date departureDate, Time departureTime,
-            Date arrivalDate, Time estimatedArrivalTime, Location fromLocation, Location toLocation) {
-        this.plane = plane;
-        this.currentSeat = currentSeat;
-        this.departureDate = departureDate;
-        this.departureTime = departureTime;
-        this.arrivalDate = arrivalDate;
-        this.estimatedArrivalTime = estimatedArrivalTime;
-        this.fromLocation = fromLocation;
-        this.toLocation = toLocation;
-        this.createdAt = new Timestamp(System.currentTimeMillis());
+    public List<Flights_Seat> getFlightsSeatList() {
+        return flightsSeatList;
     }
 
-    public Flight(int idFlight, Plane plane, int currentSeat, Date departureDate, Time departureTime,
-            Date arrivalDate, Time estimatedArrivalTime, Location fromLocation, Location toLocation) {
-        this.idFlight = idFlight;
+    public void setFlightsSeatList(List<Flights_Seat> flightsSeatList) {
+        this.flightsSeatList = flightsSeatList;
+    }
+
+    public Long getDurationMinutes() {
+        return durationMinutes;
+    }
+
+    public void setDurationMinutes(Long durationMinutes) {
+        this.durationMinutes = durationMinutes;
+    }
+
+    public Flight(Plane plane, Date departureDate, Time departureTime, Long durationMinutes, Location fromLocation, Location toLocation, List<Flights_Seat> flightsSeatList, Timestamp createdAt) {
         this.plane = plane;
-        this.currentSeat = currentSeat;
         this.departureDate = departureDate;
         this.departureTime = departureTime;
-        this.arrivalDate = arrivalDate;
-        this.estimatedArrivalTime = estimatedArrivalTime;
+        this.durationMinutes = durationMinutes;
         this.fromLocation = fromLocation;
         this.toLocation = toLocation;
-        this.createdAt = new Timestamp(System.currentTimeMillis());
+        this.flightsSeatList = flightsSeatList;
+        this.createdAt = createdAt;
     }
 
     public Date getDepartureDate() {
@@ -83,13 +122,6 @@ public class Flight {
         this.departureDate = departureDate;
     }
 
-    public Date getArrivalDate() {
-        return arrivalDate;
-    }
-
-    public void setArrivalDate(Date arrivalDate) {
-        this.arrivalDate = arrivalDate;
-    }
 
     public int getKey() {
         return idFlight;
@@ -112,28 +144,12 @@ public class Flight {
         this.plane = plane;
     }
 
-    public int getCurrentSeat() {
-        return currentSeat;
-    }
-
-    public void setCurrentSeat(int currentSeat) {
-        this.currentSeat = currentSeat;
-    }
-
     public Time getDepartureTime() {
         return departureTime;
     }
 
     public void setDepartureTime(Time departureTime) {
         this.departureTime = departureTime;
-    }
-
-    public Time getEstimatedArrivalTime() {
-        return estimatedArrivalTime;
-    }
-
-    public void setEstimatedArrivalTime(Time estimatedArrivalTime) {
-        this.estimatedArrivalTime = estimatedArrivalTime;
     }
 
     public Location getFromLocation() {
@@ -165,9 +181,7 @@ public class Flight {
         return "Flight{" +
                 "idFlight=" + idFlight +
                 ", plane=" + plane +
-                ", currentSeat=" + currentSeat +
                 ", departureTime=" + departureTime +
-                ", estimatedArrivalTime=" + estimatedArrivalTime +
                 ", fromLocation='" + fromLocation + '\'' +
                 ", toLocation='" + toLocation + '\'' +
                 ", createdAt=" + createdAt +
@@ -177,11 +191,9 @@ public class Flight {
     public void Copy(Flight flight) {
         this.idFlight = flight.idFlight;
         this.plane = flight.plane;
-        this.currentSeat = flight.currentSeat;
         this.departureDate = flight.departureDate;
         this.departureTime = flight.departureTime;
-        this.arrivalDate = flight.arrivalDate;
-        this.estimatedArrivalTime = flight.estimatedArrivalTime;
+        this.durationMinutes = flight.durationMinutes;
         this.fromLocation = flight.fromLocation;
         this.toLocation = flight.toLocation;
         // createdAt bằng thời gian hiện tại

@@ -25,20 +25,20 @@ import com.example.demo.Model.Seat;
  */
 @Repository
 public interface TicketRepo extends JpaRepository<Ticket, Integer> {
-    Ticket findByIdTicket(int idTicket);
-
-    List<Ticket> findByFlight(Flight flightId);
-
-    List<Ticket> findByFlightReturn(Flight flightReturnId);
-
-    List<Ticket> findByCustomer(Customer customer);
-
-    List<Ticket> findBySeat(Seat seat);
-
-    List<Ticket> findByReturnFlightSeat(Seat returnFlightSeatId);
-
-    List<Ticket> findByBookingDay(Date bookingDay);
-
-    List<Ticket> findByBaggage(Baggage Id_Baggage);
+//    Ticket findByIdTicket(int idTicket);
+//
+//    List<Ticket> findByFlight(Flight flightId);
+//
+//    List<Ticket> findByFlightReturn(Flight flightReturnId);
+//
+//    List<Ticket> findByCustomer(Customer customer);
+//
+//    List<Ticket> findBySeat(Seat seat);
+//
+//    List<Ticket> findByReturnFlightSeat(Seat returnFlightSeatId);
+//
+//    List<Ticket> findByBookingDay(Date bookingDay);
+//
+//    List<Ticket> findByBaggage(Baggage Id_Baggage);
 
 }

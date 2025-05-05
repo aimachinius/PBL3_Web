@@ -1,15 +1,10 @@
 package com.example.demo.Model;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
-import jakarta.persistence.Column;
+
 import com.example.demo.Enum.SeatType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -20,10 +15,13 @@ public class Seat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Seat")
     private int idSeat;
-    @Column(name = "Seat_Number")
+
+    @Column(name = "Seat_Number", unique = true)
     private String seatNumber;
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "Seat_Type")
-    private String seatType;
+    private SeatType seatType;
 
     @ManyToOne
     @JoinColumn(name = "Id_Plane")
@@ -36,14 +34,14 @@ public class Seat {
     public Seat(int idSeat, String seatNumber, SeatType seatType, Plane plane) {
         this.idSeat = idSeat;
         this.seatNumber = seatNumber;
-        this.seatType = seatType.toString();
+        this.seatType = seatType;
         this.plane = plane;
     }
 
     public Seat(String seatNumber, SeatType seatType, Plane plane) {
 
         this.seatNumber = seatNumber;
-        this.seatType = seatType.toString();
+        this.seatType = seatType;
         this.plane = plane;
     }
 
@@ -76,11 +74,11 @@ public class Seat {
     }
 
     public SeatType getSeatType() {
-        return SeatType.valueOf(seatType);
+        return seatType;
     }
 
     public void setSeatType(SeatType seatType) {
-        this.seatType = seatType.toString();
+        this.seatType = seatType;
     }
 
     public Plane getPlane() {
@@ -103,7 +101,7 @@ public class Seat {
 
     public void Copy(Seat seat) {
         this.seatNumber = seat.getSeatNumber();
-        this.seatType = seat.getSeatType().toString();
+        this.seatType = seat.getSeatType();
         this.plane = seat.getPlane();
     }
 }
