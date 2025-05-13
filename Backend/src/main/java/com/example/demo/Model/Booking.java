@@ -4,14 +4,15 @@ import com.example.demo.Enum.PaymentMethod;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Payments")
-public class Payment {
+@Table(name = "bookings")
+public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payment_id")
+    @Column(name = "booking_id")
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -26,7 +27,10 @@ public class Payment {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "payment_method")
-    private PaymentMethod paymentMethod;
+    private PaymentMethod paymentMethod;    
+    
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ticket> tickets;
 
     public int getId() {
         return id;
@@ -70,8 +74,8 @@ public class Payment {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Payment payment)) return false;
-        return id == payment.id;
+        if (!(o instanceof Booking booking)) return false;
+        return id == booking.id;
     }
 
     @Override

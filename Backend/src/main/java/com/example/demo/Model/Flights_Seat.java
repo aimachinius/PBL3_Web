@@ -2,13 +2,7 @@ package com.example.demo.Model;
 
 import java.util.Objects;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import com.example.demo.Enum.SeatStatus;
 
 @Entity
@@ -18,16 +12,23 @@ public class Flights_Seat {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "Id_Flight")
+    @JoinColumn(name = "Id_Flight", referencedColumnName = "Id_Flight", nullable = false)
     private Flight flight;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "Id_Seat")
+    @JoinColumn(name = "Id_Seat", referencedColumnName = "Id_Seat", nullable = false)
     private Seat seat;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "Seat_Status")
     private SeatStatus seatStatus;
+
+    @OneToOne(mappedBy = "departureSeat")
+    private Ticket ticketDeparture;
+
+    @OneToOne(mappedBy = "returnSeat")
+    private Ticket ticketReturn;
 
     public Flights_Seat() {
     }

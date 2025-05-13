@@ -21,6 +21,7 @@ public class CustomerService {
     public List<Customer> getAllCustomer() {
         return customerRepo.findAll();
     }
+/*
 
     public Customer getCustomerById(int idCustomer) {
         return customerRepo.findByIdCard(idCustomer);
@@ -51,6 +52,7 @@ public class CustomerService {
             customerRepo.save(customer);
         }
     }
+*/
 
 //    public void updateCustomer(Customer customer) {
 //        if (customerRepo.existsById(customer.getIdCustomer())) {

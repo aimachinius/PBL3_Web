@@ -1,4 +1,4 @@
-import { findFlight } from "../../../../APIs/shared/flight.js";
+import { findFlight } from "../../../../APIs/flight.js";
 
 const searchFormData = JSON.parse(sessionStorage.getItem('search-form-data'));
 function renderRouteInfo(data, direction) {

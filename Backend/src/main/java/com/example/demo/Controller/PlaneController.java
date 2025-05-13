@@ -39,10 +39,10 @@ public class PlaneController {
 //    }
 
     // Get planes by seat count
-    @GetMapping("/seats/{count}")
-    public List<Plane> getPlaneBySeatCount(@PathVariable int count) {
-        return planeService.getPlaneBySeatCount(count);
-    }
+//    @GetMapping("/seats/{count}")
+//    public List<Plane> getPlaneBySeatCount(@PathVariable int count) {
+//        return planeService.getPlaneBySeatCount(count);
+//    }
 
     // Create a new plane
     @PostMapping("")

@@ -2,9 +2,12 @@
     <h2 class="text-xl font-bold mb-4">Quản lý vé máy bay</h2>
 
     <!-- Nút thêm máy bay -->
-    <button id="add-plane-btn" class="bg-green-500 text-white py-2 px-4 rounded mb-4">Thêm vé máy bay</button>
-    <button id="edit-plane-btn" class="bg-blue-500 text-white py-2 px-4 rounded mb-4">Chỉnh sửa</button>
-    <button id="remove-plane-btn" class="bg-red-500 text-white py-2 px-4 rounded mb-4">Xóa</button>
+    <div class="flex space-x-4 mb-4">
+        <button id="view-seat-map-btn" class="bg-green-500 text-white py-2 px-4 rounded mb-4">Xem sơ đồ ghế</button>
+        <button id="add-plane-btn" class="bg-green-500 text-white py-2 px-4 rounded mb-4">Thêm vé máy bay</button>
+        <button id="edit-plane-btn" class="bg-blue-500 text-white py-2 px-4 rounded mb-4">Chỉnh sửa</button>
+        <button id="remove-plane-btn" class="bg-red-500 text-white py-2 px-4 rounded mb-4">Xóa</button>
+    </div>
     <table class="w-full table-auto border border-gray-300" id="table-plane">
         <thead>
             <tr class="bg-green-500">
@@ -79,6 +82,48 @@
                 Lưu máy bay
             </button>
         </form>
+    </div>
+
+    <div id="seat-map-view-container"
+        class="flex justify-center items-center absolute inset-0 bg-black/30 backdrop-blur-sm z-50 hidden">
+        <div id="seat-map-parent-container"
+            class="flex flex-col items-center w-full max-w-xl max-h-4/5 ml-3 h-full rounded-2xl p-4">
+
+            <div class="flex justify-around items-center w-full h-16 bg-amber-50 rounded-xl mb-4">
+                <div id="vip-seat"
+                    class=" text-xs font-semibold border-2 bg-yellow-500 hover:bg-amber-100 border-black rounded-lg p-2">
+                    Ghế thương gia</div>
+                <div id="economy-seat"
+                    class=" text-xs font-semibold border-2 bg-blue-400 hover:bg-amber-100 border-black rounded-lg p-2">
+                    Ghế phổ thông</div>
+                <div id="no-seat"
+                    class=" text-xs font-semibold border-2 bg-amber-100     hover:bg-amber-100 border-black rounded-lg p-2">
+                    Không chọn</div>
+            </div>
+
+            <div id="seat-map-container" class="w-full h-full overflow-auto"></div>
+            <!-- Header chữ cái -->
+            <!-- <div class="flex w-full mb-4">
+                <div class="w-10"></div> Cột trống để cân số hàng -->
+            <!-- <div id="header-seat-map" class=" flex justify-around flex-1 w-full">
+                </div>
+            </div> -->
+            <div class="flex flex-col items-center w-full bg-amber-50 rounded-xl mt-4 p-4">
+                <div class="flex gap-4">
+                    <div class="text-sm">
+                        Số ghế thương gia: <span id="vip-seat-count" class="font-semibold">0</span>
+                    </div>
+                    <div class="text-sm">
+                        Số ghế phổ thông: <span id="economy-seat-count" class="font-semibold">0</span>
+                    </div>
+                    <div class="text-sm">
+                        Tổng số ghế: <span id="total-seat-count" class="font-semibold">0</span>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
     </div>
 
 </div>

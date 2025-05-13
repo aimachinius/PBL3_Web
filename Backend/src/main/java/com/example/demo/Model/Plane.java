@@ -32,8 +32,6 @@ public class Plane {
     private Status status;
     @Column(name = "Flight_Hours")
     private int flightHours;
-    @Column(name = "Seat_Count")
-    private int seatCount;
 
     @OneToMany(mappedBy = "plane", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<Seat> seats = new ArrayList<>();
@@ -48,7 +46,6 @@ public class Plane {
         this.namePlane = namePlane;
         this.status = status;
         this.flightHours = flightHours;
-        this.seatCount = seatCount;
     }
 
     public Plane(int idPlane, String namePlane, Status status, int flightHours, int seatCount) {
@@ -56,15 +53,27 @@ public class Plane {
         this.namePlane = namePlane;
         this.status = status;
         this.flightHours = flightHours;
-        this.seatCount = seatCount;
     }
 
-    public List<Seat> getSeat() {
+    public List<Seat> getSeats() {
         return seats;
     }
 
-    public void setSeat(List<Seat> seats) {
+    public void setSeats(List<Seat> seats) {
         this.seats = seats;
+        if (seats != null) {
+            for (Seat seat : seats) {
+                seat.setPlane(this);  // Gán ngược Plane cho từng Seat
+            }
+        }
+    }
+
+    public List<Flight> getFlights() {
+        return flights;
+    }
+
+    public void setFlights(List<Flight> flights) {
+        this.flights = flights;
     }
 
     public int getKey() {
@@ -76,7 +85,6 @@ public class Plane {
         value.add(namePlane);
         value.add(status.toString());
         value.add(String.valueOf(flightHours));
-        value.add(String.valueOf(seatCount));
         return value;
     }
 
@@ -112,21 +120,11 @@ public class Plane {
         this.flightHours = flightHours;
     }
 
-    public int getSeatCount() {
-        return seatCount;
-    }
-
-    public void setSeatCount(int seatCount) {
-        this.seatCount = seatCount;
-    }
-
     public void Copy(Plane plane) {
         this.idPlane = plane.idPlane;
         this.namePlane = plane.namePlane;
         this.status = plane.status;
         this.flightHours = plane.flightHours;
-        this.seatCount = plane.seatCount;
-
     }
 
     @Override
@@ -136,7 +134,6 @@ public class Plane {
                 ", namePlane='" + namePlane + '\'' +
                 ", status=" + status +
                 ", flightHours=" + flightHours +
-                ", seatCount=" + seatCount +
                 '}';
     }
 }

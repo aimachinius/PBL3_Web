@@ -13,6 +13,4 @@ public interface PlaneRepo extends JpaRepository<Plane, Integer> {
 
     List<Plane> findByNamePlane(String namePlane);
 
-    List<Plane> findBySeatCount(int seatCount);
-
 }

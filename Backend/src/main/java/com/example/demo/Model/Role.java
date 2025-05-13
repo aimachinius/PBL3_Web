@@ -11,6 +11,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_role")
     private Long id;
+
     private String name;
 
     @ElementCollection(fetch = FetchType.LAZY)

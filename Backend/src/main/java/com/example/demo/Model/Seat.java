@@ -16,7 +16,7 @@ public class Seat {
     @Column(name = "Id_Seat")
     private int idSeat;
 
-    @Column(name = "Seat_Number", unique = true)
+    @Column(name = "Seat_Number")
     private String seatNumber;
 
     @Enumerated(EnumType.STRING)

@@ -2,7 +2,6 @@ package com.example.demo.Model;
 
 import jakarta.persistence.*;
 
-import java.lang.ref.Reference;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
@@ -21,11 +20,11 @@ public class Account {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "phone")
-    private String phone;
-
     @Column(name = "full_name")
     private String fullName;
+
+    @Column(name = "phone")
+    private String phone;
 
     @Column(name = "day_of_birth")
     private Date dayOfBirth;
@@ -40,7 +39,7 @@ public class Account {
     private Timestamp createdAt;
 
     @OneToOne
-    @JoinColumn(name = "role", referencedColumnName = "id_role", nullable = true)
+    @JoinColumn(name = "role", referencedColumnName = "id_role", nullable = true,unique = false)
     private Role role;
 
     public int getIdAccount() {
@@ -148,6 +147,18 @@ public class Account {
                 ", createdAt=" + createdAt +
                 ", role=" + role +
                 '}';
+    }
+    public void copyFrom(Account other) {
+        if (other == null) return;
+
+        this.fullName = other.fullName;
+        this.email = other.email;
+        this.password = other.password;
+        this.phone = other.phone;
+        this.dayOfBirth = other.dayOfBirth;
+        this.country = other.country;
+        this.sex = other.sex;
+        this.role = other.role; // shallow copy
     }
 }
 // Tạo tk -> Nhậpf Account bao gồm customer

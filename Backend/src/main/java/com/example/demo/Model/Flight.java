@@ -13,51 +13,52 @@ import java.util.List;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idFlight")
 @Table(name = "Flights")
 public class Flight {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Flight")
     private int idFlight;
 
     @ManyToOne
-    @JoinColumn(name = "Id_Plane",referencedColumnName = "Id_Plane",nullable = false)
+    @JoinColumn(name = "Id_Plane", referencedColumnName = "Id_Plane", nullable = false)
     private Plane plane;
 
-    @Column(name = "Departure_Date",nullable = false)
+    @Column(name = "Departure_Date", nullable = false)
     private Date departureDate;
-    @Column(name = "Departure_Time",nullable = false)
+    @Column(name = "Departure_Time", nullable = false)
     private Time departureTime;
     @Column(name = "Duration_Minutes")
     private Long durationMinutes;
-    @Column(name="common_fare",nullable = false)
-    private  Long commonFare;
-    @Column(name="vip_fare", nullable = false)
+
+    @Column(name = "common_fare", nullable = false)
+    private Long commonFare;
+    @Column(name = "vip_fare", nullable = false)
     private Long vipFare;
 
     @ManyToOne
-    @JoinColumn(name = "F_R_O_M",referencedColumnName = "id",nullable = false)
+    @JoinColumn(name = "F_R_O_M", referencedColumnName = "id", nullable = false)
     private Location fromLocation;
+
     @ManyToOne
-    @JoinColumn(name = "T_O",referencedColumnName = "id",nullable = false)
+    @JoinColumn(name = "T_O", referencedColumnName = "id", nullable = false)
     private Location toLocation;
+
 
     @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Flights_Seat> flightsSeatList;
+    // @OneToMany(mappedBy = "flightReturn", cascade =
+    // CascadeType.ALL,orphanRemoval = true)
+    // private List<Ticket> boughtTicket;
 
-    @OneToMany(mappedBy = "flightReturn", cascade = CascadeType.ALL,orphanRemoval = true)
-    private  List<Ticket> boughtTicket;
-
-
-    public List<Ticket> getBoughtTicket() {
-        return boughtTicket;
-    }
-
-    public void setBoughtTicket(List<Ticket> boughtTicket) {
-        this.boughtTicket = boughtTicket;
-    }
+    //
+    // public List<Ticket> getBoughtTicket() {
+    // return boughtTicket;
+    // }
+    //
+    // public void setBoughtTicket(List<Ticket> boughtTicket) {
+    // this.boughtTicket = boughtTicket;
+    // }
 
     private Timestamp createdAt;
-
 
     public long getCommonFare() {
         return commonFare;
@@ -74,7 +75,6 @@ public class Flight {
     public void setVipFare(long vipFare) {
         this.vipFare = vipFare;
     }
-
 
     public void setCommonFare(Long commonFare) {
         this.commonFare = commonFare;
@@ -103,7 +103,8 @@ public class Flight {
         this.durationMinutes = durationMinutes;
     }
 
-    public Flight(Plane plane, Date departureDate, Time departureTime, Long durationMinutes, Location fromLocation, Location toLocation, List<Flights_Seat> flightsSeatList, Timestamp createdAt) {
+    public Flight(Plane plane, Date departureDate, Time departureTime, Long durationMinutes, Location fromLocation,
+            Location toLocation, List<Flights_Seat> flightsSeatList, Timestamp createdAt) {
         this.plane = plane;
         this.departureDate = departureDate;
         this.departureTime = departureTime;
@@ -122,11 +123,9 @@ public class Flight {
         this.departureDate = departureDate;
     }
 
-
     public int getKey() {
         return idFlight;
     }
-
 
     public int getIdFlight() {
         return idFlight;

@@ -1,4 +1,4 @@
-import { getAllLocation } from "../../../../APIs/shared/location.js"
+import { getAllLocation } from "../../../../APIs/location.js"
 
 let checkisKhuHoi = document.getElementById("la-khu-hoi")
 let ngayVeInputBox = document.getElementById("ngayve");

@@ -33,9 +33,9 @@ public class PlaneService {
         return planeRepo.findByNamePlane(namePlane);
     }
 
-    public List<Plane> getPlaneBySeatCount(int seatCount) {
-        return planeRepo.findBySeatCount(seatCount);
-    }
+//    public List<Plane> getPlaneBySeatCount(int seatCount) {
+//        return planeRepo.findBySeatCount(seatCount);
+//    }
 
     public void deletePlane(int idPlane) {
         planeRepo.deleteById(idPlane);

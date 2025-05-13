@@ -16,8 +16,9 @@ import com.example.demo.Model.Plane;
 public interface SeatRepo extends JpaRepository<Seat, Integer> {
     Seat findByIdSeat(int idSeat);
 
-    @Query("SELECT s FROM Seat s WHERE s.seatNumber = ?1")
-    List<Seat> findByPlane(Plane plane);
+    @Query("SELECT s FROM Seat s WHERE s.plane.idPlane = ?1")
+    List<Seat> findByPlane(int idPlane);
+
 
     List<Seat> findBySeatType(String seatType);
 

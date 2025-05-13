@@ -17,13 +17,13 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CustomerRepo extends JpaRepository<Customer, Integer> {
-    Customer findByIdCard(int idCustomer);
-
-    List<Customer> findByFullName(String nameCustomer);
-
-    List<Customer> findByTel(String teleplone);
-
-    List<Customer> findByEmail(String email);
-
-    List<Customer> findByCountry(String address);
+//    Customer findByIdCard(int idCustomer);
+//
+//    List<Customer> findByFullName(String nameCustomer);
+//
+//    List<Customer> findByTel(String teleplone);
+//
+//    List<Customer> findByEmail(String email);
+//
+//    List<Customer> findByCountry(String address);
 }

@@ -28,7 +28,6 @@ export default async function loadPlane() {
         planeFormContainer.querySelector('#namePlane').value = '';
         planeFormContainer.querySelector('#status').value = '';
         planeFormContainer.querySelector('#flightHours').value = '';
-        planeFormContainer.querySelector('#seatCount').value = '';
 
         planeFormContainer.classList.toggle("hidden");
     });
@@ -42,7 +41,6 @@ export default async function loadPlane() {
         planeFormContainer.querySelector('#namePlane').value = selectedPlane.namePlane;
         planeFormContainer.querySelector('#status').value = selectedPlane.status;
         planeFormContainer.querySelector('#flightHours').value = selectedPlane.flightHours;
-        planeFormContainer.querySelector('#seatCount').value = selectedPlane.seatCount;
 
         planeFormContainer.classList.toggle("hidden");
     })
@@ -55,8 +53,9 @@ export default async function loadPlane() {
 
 
 
+    const seatMapParentContainer = document.getElementById('seat-map-parent-container');
     planeFormContainer.addEventListener("click", function (event) {
-        if (!planeForm.contains(event.target)) {
+        if (!planeForm.contains(event.target) && !seatMapParentContainer.contains(event.target)) {
             planeFormContainer.classList.add("hidden");
         }
     });
@@ -71,11 +70,62 @@ export default async function loadPlane() {
         selectedPlane = null;
     })
 
+    // todo: set create seat map
+    document.getElementById('generate-seat-map-btn').addEventListener('click', setCreateSeatMap);
+
+    setActionCreateSeatMap();
+}
+
+// set nut bâm chọn ghế
+let selectedSeatBtn = 'no-seat';
+function setActionCreateSeatMap() {
+
+    const borderColor = 'border-black';
+    const borderColorSelected = 'border-amber-500';
+    const vipSeat = document.getElementById('vip-seat');
+    const economySeat = document.getElementById('economy-seat');
+    const noSeat = document.getElementById('no-seat');
+    noSeat.classList.remove(borderColor);
+    noSeat.classList.add(borderColorSelected);
+
+    let restartSeatBtn = () => {
+        vipSeat.classList.remove(borderColorSelected);
+        vipSeat.classList.add(borderColor);
+        economySeat.classList.remove(borderColorSelected);
+        economySeat.classList.add(borderColor);
+        noSeat.classList.remove(borderColorSelected);
+        noSeat.classList.add(borderColor);
+    };
+
+    vipSeat.addEventListener('click', () => {
+        selectedSeatBtn = 'vip-seat';
+        restartSeatBtn();
+        vipSeat.classList.remove(borderColor);
+        vipSeat.classList.add(borderColorSelected);
+        console.log(selectedSeatBtn);
+    });
+    economySeat.addEventListener('click', () => {
+        selectedSeatBtn = 'economy-seat';
+        restartSeatBtn();
+        economySeat.classList.remove(borderColor);
+        economySeat.classList.add(borderColorSelected);
+        console.log(selectedSeatBtn);
+    });
+    noSeat.addEventListener('click', () => {
+        selectedSeatBtn = 'no-seat';
+        restartSeatBtn();
+        noSeat.classList.remove(borderColor);
+        noSeat.classList.add(borderColorSelected);
+        console.log(selectedSeatBtn);
+    });
+
+
 }
 
 async function handelCUSubmit(e) {
     e.preventDefault(); // Ngăn submit reload trang
     const tempplane = getPlaneFromForm(e);
+    console.log(tempplane);
 
     if (selectedPlane != null) {
 
@@ -94,17 +144,156 @@ async function handelCUSubmit(e) {
     console.log(selectedPlane);
 }
 
+function setCreateSeatMap() {
+
+    const vipSeatCount = document.getElementById('vip-seat-count');
+    const economySeatCount = document.getElementById('economy-seat-count');
+    const totalSeatCount = document.getElementById('total-seat-count');
+
+    const seat_map = document.getElementById('seat-map-container');
+    seat_map.innerHTML = '';
+
+    const head_seat_map = document.createElement('div');
+    head_seat_map.className = "flex w-full mb-4";
+    head_seat_map.innerHTML = `
+        <div class="w-10"></div>
+    `;
+    const seat_map_row = document.createElement('div');
+    seat_map_row.className = "flex justify-around flex-1 w-full";
+    head_seat_map.appendChild(seat_map_row);
+    seat_map.appendChild(head_seat_map);
+
+
+
+    const rowNumber = document.getElementById('num-rows');
+    const rowSeat = document.getElementById('seats-per-row');
+
+    for (let i = 0; i < rowSeat.value; i++) {
+        const row = document.createElement('div');
+        row.className = "text-center font-semibold";
+        row.innerHTML = String.fromCharCode(65 + i);
+        seat_map_row.appendChild(row);
+    }
+    vipSeatCount.innerHTML = 0;
+    economySeatCount.innerHTML = rowSeat.value * rowNumber.value;
+    totalSeatCount.innerHTML = economySeatCount.innerHTML;
+
+
+    for (let i = 0; i < rowNumber.value; i++) {
+        const row = document.createElement('div');
+        row.className = "flex mt-3 w-full";
+        row.innerHTML = `
+                <div class="w-10 text-center font-semibold">${i + 1}</div> 
+                <div id="seat-map-row-${i}" class="flex justify-around flex-1 w-full">
+                </div>`;
+        seat_map.appendChild(row);
+        const current_row_seat = row.querySelector(`#seat-map-row-${i}`);
+        for (let j = 0; j < rowSeat.value; j++) {
+            const seat = document.createElement('div');
+            seat.className = "text-center font-semibold bg-blue-500 hover:bg-white text-white px-4 py-2 rounded-md";
+            seat.setAttribute('seat', 'economy-seat');
+            seat.setAttribute('seat-number', `${i}${String.fromCharCode(65 + j)}`);
+            seat.addEventListener('click', () => {
+
+                seat.setAttribute('seat', selectedSeatBtn);
+
+                if (selectedSeatBtn == 'vip-seat') {
+                    seat.className = "text-center font-semibold bg-yellow-500 hover:bg-white text-white px-4 py-2 rounded-md";
+                }
+                else if (selectedSeatBtn == 'economy-seat') {
+                    seat.className = "text-center font-semibold bg-blue-400 hover:bg-white text-white px-4 py-2 rounded-md";
+                }
+                else if (selectedSeatBtn == 'no-seat') {
+                    seat.className = "text-center font-semibold bg-amber-100 hover:bg-white text-white px-4 py-2 rounded-md";
+                }
+                let _vipSeatCount = 0;
+                let _economySeatCount = 0;
+                seat_map.querySelectorAll('[seat]').forEach(seat => {
+                    if (seat.getAttribute('seat') == 'vip-seat') {
+                        _vipSeatCount++;
+                    }
+                    else if (seat.getAttribute('seat') == 'economy-seat') {
+                        _economySeatCount++;
+                    }
+                });
+                vipSeatCount.innerHTML = _vipSeatCount;
+                economySeatCount.innerHTML = _economySeatCount;
+                totalSeatCount.innerHTML = _vipSeatCount + _economySeatCount;
+            });
+
+            // seat.innerHTML = '<button class="bg-blue-500 text-white px-4 py-2 rounded-md"></button>';
+            current_row_seat.appendChild(seat);
+        }
+    }
+}
+
+
+// document.getElementById('generate-seat-map').addEventListener('click', function() {
+//     const numRows = parseInt(document.getElementById('num-rows').value);
+//     const seatsPerRow = parseInt(document.getElementById('seats-per-row').value);
+//     const seatMap = document.getElementById('seat-map');
+
+//     // Xóa sơ đồ cũ nếu có
+//     seatMap.innerHTML = '';
+
+//     // Đặt lại grid-template-rows
+//     seatMap.style.display = 'grid';
+//     seatMap.style.gridTemplateRows = `repeat(${numRows}, auto)`;
+//     seatMap.style.gap = '8px';
+
+//     for (let i = 0; i < numRows; i++) {
+//         // Tạo 1 hàng ghế
+//         const row = document.createElement('div');
+//         row.style.display = 'grid';
+//         row.style.gridTemplateColumns = `repeat(${seatsPerRow}, 40px)`; // mỗi ghế 40px
+//         row.style.gap = '8px';
+
+//         for (let j = 0; j < seatsPerRow; j++) {
+//             const seat = document.createElement('div');
+//             seat.classList.add('seat');
+//             seat.style.width = '40px';
+//             seat.style.height = '40px';
+//             seat.style.backgroundColor = '#ddd';
+//             seat.style.border = '1px solid #999';
+//             seat.style.borderRadius = '6px';
+//             seat.style.display = 'flex';
+//             seat.style.alignItems = 'center';
+//             seat.style.justifyContent = 'center';
+//             seat.textContent = `${i+1}${String.fromCharCode(65 + j)}`; // Ví dụ 1A, 1B,...
+//             row.appendChild(seat);
+//         }
+
+//         seatMap.appendChild(row);
+//     }
+// });
 
 
 function getPlaneFromForm(e) {
     const f = e.target.elements;
+    const seats = [];
+    document.querySelectorAll('[seat]').forEach(seat => {
+        let seatType = seat.getAttribute('seat');
+        if (seatType == 'vip-seat') {
+            seatType = 'BUSINESS';
+        }
+        else if (seatType == 'economy-seat') {
+            seatType = 'ECONOMY';
+        }
+        else if (seatType == 'no-seat') {
+            return;
+        }
+        const newSeat = {
+            seatNumber: seat.getAttribute('seat-number'),
+            seatType: seatType
+        }
+        seats.push(newSeat);
+    });
     return {
         idPlane: null,
         namePlane: f["namePlane"].value.trim(),
         status: f["status"].value,
         flightHours: parseInt(f["flightHours"].value, 0),
-        seatCount: parseInt(f["seatCount"].value, 0),
-        seat: []
+        seats: seats
     };
 }
 
@@ -143,7 +332,7 @@ function loadPlanForTable(planes) {
             <td class="border px-2 py-1">${element.namePlane}</td>
             <td class="border px-2 py-1">${element.status}</td>
             <td class="border px-2 py-1">${element.flightHours}</td>
-            <td class="border px-2 py-1">${element.seatCount}</td>
+            <td class="border px-2 py-1">${element.seats.length}</td>
         `
         newRow.addEventListener('click', () => {
             const rows = table.querySelectorAll('tr');

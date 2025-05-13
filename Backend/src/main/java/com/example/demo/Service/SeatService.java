@@ -27,12 +27,12 @@ public class SeatService {
         return seatRepo.findByIdSeat(idSeat);
     }
 
-    public List<Seat> getSeatByPlaneId(Plane plane) {
-        return seatRepo.findByPlane(plane);
-    }
+//    public List<Seat> getSeatByPlaneId(Plane plane) {
+//        return seatRepo.findByPlane(plane);
+//    }
 
     public List<Seat> getSeatByPlane(Plane plane) {
-        return plane.getSeat();
+        return plane.getSeats();
     }
 
     public List<Seat> getSeatByType(String seatType) {

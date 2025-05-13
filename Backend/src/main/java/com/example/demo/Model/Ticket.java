@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -18,11 +17,11 @@ public class Ticket {
     private int idTicket;
 
     @ManyToOne
-    @JoinColumn(name = "id_customer", referencedColumnName = "Id_Card", nullable = false)
+    @JoinColumn(name = "id_customer", referencedColumnName = "id_customer", nullable = false)
     private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name = "trip_id", nullable = false)
+    @JoinColumn(name = "trip_id", referencedColumnName = "id_trip", nullable = false)
     private Trip trip;
 
     @OneToOne
@@ -37,8 +36,8 @@ public class Ticket {
             @JoinColumn(name = "return_flight_id", referencedColumnName = "id_flight"),
             @JoinColumn(name = "return_id_seat", referencedColumnName = "id_seat")
     })
-    private Flights_Seat returnSeat;
 
+    private Flights_Seat returnSeat;
 
     @Column(name = "price")
     private Long price;
@@ -46,6 +45,10 @@ public class Ticket {
     @OneToOne
     @JoinColumn(name = "Id_Baggage", referencedColumnName = "Id_Baggage")
     private Baggage baggage;
+
+    @ManyToOne
+    @JoinColumn(name = "id_booking", referencedColumnName = "booking_id", nullable = false)
+    private Booking booking;
 
     private Timestamp createdAt;
 
@@ -115,7 +118,8 @@ public class Ticket {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Ticket ticket)) return false;
+        if (!(o instanceof Ticket ticket))
+            return false;
         return idTicket == ticket.idTicket;
     }
 

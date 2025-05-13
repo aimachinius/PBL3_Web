@@ -3,37 +3,59 @@ const API_BASE = BASE_URL + '/plane';
 
 // Lấy danh sách tất cả máy bay
 export async function getAllPlanes() {
-    const res = await fetch(API_BASE + '/all_plane');
-    return await res.json();
+    try {
+        const res = await fetch(API_BASE + '/all_plane');
+        return await res.json();
+    } catch (error) {
+        console.error("Lỗi khi lấy danh sách máy bay:", error);
+    }
+    return [];
 }
 
 // Lấy thông tin 1 máy bay theo ID
 export async function getPlaneById(id) {
-    const res = await fetch(`${API_BASE}/${id}`);
-    return await res.json();
+    try {
+        const res = await fetch(`${API_BASE}/${id}`);
+        return await res.json();
+    } catch (error) {
+        console.error("Lỗi khi lấy thông tin máy bay:", error);
+    }
+    return null;
 }
 
 // Thêm máy bay mới
 export async function addPlane(plane) {
-    await fetch(API_BASE, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(plane)
-    });
+    try {
+        await fetch(API_BASE, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(plane)
+        });
+    } catch (error) {
+        console.error("Lỗi khi thêm máy bay:", error);
+    }
 }
 
 // Cập nhật máy bay
 export async function updatePlane(plane) {
-    await fetch(API_BASE, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(plane)
-    });
+    try {
+        await fetch(API_BASE, {
+            method: "PUT", 
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(plane)
+        });
+    } catch (error) {
+        console.error("Lỗi khi cập nhật máy bay:", error);
+    }
 }
 
 // Xóa máy bay theo ID
 export async function deletePlane(id) {
-    await fetch(`${API_BASE}/${id}`, {
-        method: "DELETE"
-    });
+    try {
+        await fetch(`${API_BASE}/${id}`, {
+            method: "DELETE"
+        });
+    } catch (error) {
+        console.error("Lỗi khi xóa máy bay:", error);
+    }
 }

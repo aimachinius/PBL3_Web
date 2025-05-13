@@ -9,16 +9,7 @@ import jakarta.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-/*
- * Id_Card string [primary key]
-  Full_Name string
-  Tel string
-  Email string
-  Country string
-  Day_Of_Birth string
-  Sex boolean 0:woman 1:man
-  created_at timestamp
- */
+
 @Entity
 @Table(name = "Customers")
 public class Customer {
@@ -34,15 +25,16 @@ public class Customer {
     @Column(name = "Day_Of_Birth")
     private Date dayOfBirth;
 
-    @Enumerated(EnumType.STRING) // Lưu dưới dạng chuỗi trong DB (ví dụ: "INDIVIDUAL")
+    @Enumerated(EnumType.STRING)
     @Column(name = "Customer_Type")
     private CustomerCategory customerType;
 
-   @JoinColumn(name = "account", referencedColumnName = "id_account",nullable = true)
-   private Account account;
+    @OneToOne
+    @JoinColumn(name = "account", referencedColumnName = "id_account")
+    private Account account;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Payment> payments = new ArrayList<>();
+    private List<Booking> bookings = new ArrayList<>();
 
     public int getIdCustomer() {
         return idCustomer;
@@ -95,11 +87,11 @@ public class Customer {
         return Objects.hashCode(idCustomer);
     }
 
-    public List<Payment> getPayments() {
-        return payments;
+    public List<Booking> getBookings() {
+        return bookings;
     }
 
-    public void setPayments(List<Payment> payments) {
-        this.payments = payments;
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 }

@@ -10,6 +10,7 @@ import java.util.Objects;
 public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_trip")
     private int id;
 
     @ManyToOne
