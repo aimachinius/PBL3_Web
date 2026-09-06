@@ -5,7 +5,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'user/timChuyenBay.html'),
+        main: resolve(__dirname, 'index.html'),
       }
     }
   }

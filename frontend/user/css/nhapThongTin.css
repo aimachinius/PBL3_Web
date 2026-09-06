@@ -192,7 +192,8 @@
     .column {
       flex: 1;
     }
-    #form-for-bt{
+
+    #form-for-bt {
       background-color: transparent;
       border: none;
       outline: none;
@@ -221,4 +222,160 @@
       border-color: #005F6E;
       border-radius: 10px;
       cursor: pointer;
-        }
+    }
+
+
+    /**/
+    /* CSS cho phần điều khoản và đồng ý */
+    .terms-consent-section {
+      /* Giữ nguyên style của container-form, chỉ thêm background màu vàng */
+      background: #fff7e6 !important;
+      border: 1px solid #ffc107 !important;
+    }
+
+    .terms-row,
+    .marketing-row {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      padding: 0 15px;
+      /* Thêm padding để căn chỉnh với nội dung form */
+    }
+
+    .terms-row:first-child {
+      padding-top: 15px;
+      /* Padding top cho dòng đầu */
+    }
+
+    .terms-row:last-child,
+    .marketing-row:last-child {
+      margin-bottom: 0;
+      padding-bottom: 15px;
+      /* Padding bottom cho dòng cuối */
+    }
+
+    .checkbox_container {
+      display: flex;
+      align-items: flex-start;
+      flex: 1;
+    }
+
+    .checkbox_container input[type="checkbox"] {
+      margin-right: 12px;
+      margin-top: 2px;
+      width: 18px;
+      height: 18px;
+      accent-color: #0066cc;
+      cursor: pointer;
+    }
+
+    .checkbox_label {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #333;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .privacy-link {
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    .privacy-link:hover {
+      text-decoration: underline;
+    }
+
+    .details-link {
+      margin-left: 10px;
+    }
+
+    .chi-tiet-link {
+      color: #0066cc;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .chi-tiet-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+
+      .terms-row,
+      .marketing-row {
+        flex-direction: column;
+      }
+
+      .details-link {
+        margin-left: 30px;
+        margin-top: 5px;
+      }
+    }
+
+    /* Style cho checkbox khi được check */
+    /* .checkbox_container input[type="checkbox"]:checked+.checkbox_label {
+      color: #0066cc;
+    } */
+
+    /* Custom checkbox style (tùy chọn) */
+    .checkbox_container input[type="checkbox"] {
+      /* appearance: none; */
+      width: 18px;
+      height: 18px;
+      border: 2px solid #ddd;
+      border-radius: 3px;
+      background: white;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .checkbox_container input[type="checkbox"]:checked {
+      background: #0066cc;
+      border-color: #0066cc;
+    }
+
+    .checkbox_container input[type="checkbox"]:checked::after {
+      content: '✓';
+      color: white;
+      font-size: 12px;
+      position: absolute;
+      top: -1px;
+      left: 2px;
+    }
+
+    #terms-checkbox {
+      width: 16px !important;
+      height: 16px !important;
+    }
+
+    #marketing-checkbox {
+      width: 16px !important;
+      height: 16px !important;
+    }
+
+    .toast {
+      visibility: hidden;
+      min-width: 280px;
+      margin-left: -140px;
+      background-color: #f87171;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 14px;
+      position: fixed;
+      z-index: 9999;
+      left: 50%;
+      bottom: 100px;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: visibility 0s, opacity 0.5s ease;
+      opacity: 0;
+    }
+
+    .toast.show {
+      visibility: visible;
+      opacity: 1;
+    }

@@ -1,0 +1,116 @@
+<div class="relative w-full mx-auto p-4 min-h-screen bg-amber-50 overflow-y-auto">
+    <h2 class="text-xl font-bold mb-4">Quản lý người dùng</h2>
+
+    <!-- Thanh tìm kiếm -->
+    <div class="flex gap-4 mb-4">
+        <div class="flex-1">
+            <input type="text" id="search-email" placeholder="Tìm kiếm theo email..."
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-green-500">
+        </div>
+        <div class="flex-1">
+            <select id="search-user-type"
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-green-500">
+                <option value="">Tất cả loại người dùng</option>
+                <option value="CUSTOMER">Khách hàng</option>
+                <option value="STAFF">Nhân viên</option>
+                <option value="ADMIN">Quản trị viên</option>
+            </select>
+        </div>
+        <button id="search-btn" class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600">
+            Tìm kiếm
+        </button>
+    </div>
+
+    <!-- Các nút chức năng -->
+    <div class="flex justify-end gap-4">
+        <button id="add-user-btn" class="bg-green-500 text-white py-2 px-4 rounded mb-4">Thêm người dùng</button>
+        <button id="edit-user-btn" class="bg-blue-500 text-white py-2 px-4 rounded mb-4">Chỉnh sửa</button>
+        <button id="remove-user-btn" class="bg-red-500 text-white py-2 px-4 rounded mb-4">Xóa</button>
+    </div>
+
+    <!-- Bảng hiển thị danh sách người dùng -->
+    <table class="w-full table-auto border border-gray-300" id="table-user">
+        <thead>
+            <tr class="bg-green-500">
+                <th class="border px-2 py-1">ID</th>
+                <th class="border px-2 py-1">Họ và tên</th>
+                <th class="border px-2 py-1">Email</th>
+                <th class="border px-2 py-1">Số điện thoại</th>
+                <th class="border px-2 py-1">CCCD</th>
+                <th class="border px-2 py-1">Địa chỉ</th>
+                <th class="border px-2 py-1">Giới tính</th>
+                <th class="border px-2 py-1">Ngày sinh</th>
+                <th class="border px-2 py-1">Loại người dùng</th>
+            </tr>
+        </thead>
+        <tbody id="user-table-body"></tbody>
+    </table>
+
+    <!-- Form thêm/sửa người dùng -->
+    <div id="user-form-container"
+        class="flex justify-center items-center absolute inset-0 bg-black/30 backdrop-blur-sm z-50 hidden">
+        <form id="user-form" class="w-full max-w-xl p-8 bg-white rounded-2xl shadow-xl">
+            <h2 id="form-title" class="text-2xl font-semibold text-center mb-8">Thông tin người dùng</h2>
+
+            <div class="form-section mb-8">
+                <h3 class="text-xl font-medium mb-4">Thông tin cá nhân</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex flex-col">
+                        <label class="mb-1 font-medium">Họ và tên</label>
+                        <input type="text" id="fullName" required class="border rounded-lg px-4 py-2" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="mb-1 font-medium">CCCD</label>
+                        <input type="text" id="cardNumber" required class="border rounded-lg px-4 py-2" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="mb-1 font-medium">Ngày sinh</label>
+                        <input type="date" id="dayOfBirth" required class="border rounded-lg px-4 py-2" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="mb-1 font-medium">Giới tính</label>
+                        <select id="sex" required class="border rounded-lg px-4 py-2">
+                            <option value="" disabled selected>Chọn</option>
+                            <option value="MALE">Nam</option>
+                            <option value="FEMALE">Nữ</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section mb-8">
+                <h3 class="text-xl font-medium mb-4">Thông tin liên hệ</h3>
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="flex flex-col">
+                        <label class="mb-1 font-medium">Địa chỉ</label>
+                        <input type="text" id="address" required class="border rounded-lg px-4 py-2" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="mb-1 font-medium">Điện thoại di động</label>
+                        <input type="tel" id="phone" required class="border rounded-lg px-4 py-2" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="mb-1 font-medium">Email</label>
+                        <input type="email" id="email" required class="border rounded-lg px-4 py-2" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section mb-8">
+                <h3 class="text-xl font-medium mb-4">Loại người dùng</h3>
+                <div class="flex flex-col">
+                    <select id="userType" required class="border rounded-lg px-4 py-2">
+                        <option value="CUSTOMER">Khách hàng</option>
+                        <option value="STAFF">Nhân viên</option>
+                        <option value="ADMIN">Quản trị viên</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" id="submit-form-btn"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition duration-200">
+                Lưu thông tin
+            </button>
+        </form>
+    </div>
+</div>

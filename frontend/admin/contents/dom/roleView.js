@@ -17,8 +17,6 @@ export default async function loadRoleView() {
     const formContainer = document.getElementById("role-form-container");
     const form = document.getElementById("role-form");
 
-    await populatePermissionsSelect();
-
     addBtn.addEventListener("click", () => {
         selectedRole = null;
         clearForm();
@@ -57,6 +55,7 @@ export default async function loadRoleView() {
         if (!form.contains(e.target)) formContainer.classList.add("hidden");
     });
 
+    await populatePermissionsSelect();
     await loadRoleTable();
 }
 async function loadRoleTable() {
@@ -64,7 +63,7 @@ async function loadRoleTable() {
     const table = document.getElementById("role-table-body");
     table.innerHTML = ''; // Xóa dữ liệu cũ trước khi thêm mới
 
-    roles.forEach(role => {
+    roles?.forEach(role => {
         const row = document.createElement("tr");
 
       

@@ -4,27 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./css/index.css" rel="stylesheet">
+    <link href="../css/index.css" rel="stylesheet">
+    <title>Quản lý hệ thống hàng không</title>
 </head>
 
 <body class="bg-gray-100 flex h-screen">
     <!-- Sidebar -->
     <div class="w-64 bg-black text-white flex flex-col h-full">
+
         <!-- Company Header -->
         <div class="p-4 flex items-center justify-between border-b border-gray-700">
             <div class="flex items-center">
-                <div class="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center mr-2">
-                    <i class="fas fa-wave-square text-white"></i>
+                <div onclick="setContent('profileBtn')"
+                    class="px-6 py-2 flex items-center text-gray-400 hover:bg-gray-800" btn="profileBtn">
+                    <span>Hồ sơ</span>
                 </div>
-                <span class="font-semibold text-lg">Quản lý</span>
             </div>
-            <button class="text-gray-400">
-                <i class="fas fa-chevron-down"></i>
-            </button>
         </div>
 
         <!-- Search and Inbox -->
-        <div class="border-b border-gray-700">
+        <!-- <div class="border-b border-gray-700">
             <div class="p-4 flex items-center text-gray-400">
                 <i class="fas fa-search mr-3"></i>
                 <span>Search</span>
@@ -33,69 +32,88 @@
                 <i class="fas fa-inbox mr-3"></i>
                 <span>Inbox</span>
             </div>
-        </div>
-        
+        </div> -->
+
         <!-- Main Navigation -->
         <div class="flex-1 overflow-y-auto">
             <div class="py-2">
-                <div class="px-4 py-2 flex items-center text-gray-400 hover:bg-gray-800">
+                <div class="px-2 pb-2 text-gray-500">
+                    Quản lý chuyến đi
+                </div>
+                <!-- <div class="px-4 py-2 flex items-center text-gray-400 hover:bg-gray-800">
                     <i class="fas fa-home mr-3"></i>
                     <span>Home</span>
-                </div>
-                <div onclick="setContent('planeBarBtn')" class="px-4 py-2 flex items-center text-gray-400 hover:bg-gray-800">
-                    <i class="fas fa-calendar mr-3"></i>
+                </div> -->
+                <div onclick="setContent('planeBarBtn')"
+                    class="px-6 py-2 flex items-center text-gray-400 hover:bg-gray-800" btn="planeBarBtn">
+
                     <span>Máy bay</span>
                 </div>
-                <div  onclick="setContent('flightBarBtn')" class="px-4 py-2 flex items-center text-gray-400 hover:bg-gray-800 ">
-                    <i class="fas fa-shopping-cart mr-3"></i>
+                <div onclick="setContent('flightBarBtn')"
+                    class="px-6 py-2 flex items-center text-gray-400 hover:bg-gray-800 " btn="flightBarBtn">
+
                     <span>Chuyến bay</span>
                 </div>
 
-                <div  onclick="setContent('roleBarBtn')" class="px-4 py-2 flex items-center text-gray-400 hover:bg-gray-800">
-                    <i class="fas fa-cog mr-3"></i>
-                    <span>tài khoảng - role</span>
+            </div>
+            <div class="mt-6">
+                <div class="px-2 pb-2 text-gray-500">
+                    Booking - Đặt vé
                 </div>
-                <div  onclick="setContent('accountBarBtn')" class="px-4 py-2 flex items-center text-gray-400 hover:bg-gray-800">
-                    <i class="fas fa-bullhorn mr-3"></i>
-                    <span>Tài khoảng</span>
+                <!-- <div  onclick="setContent('createBookingBarBtn')" class="px-4 py-2 flex items-center text-gray-400 hover:bg-gray-800">
+                   
+                    <span>tạo Booking</span>
+                </div> -->
+
+                <div onclick="setContent('viewBookedBarBtn')"
+                    class="px-6 py-2 flex items-center text-gray-400 hover:bg-gray-800" btn="viewBookedBarBtn">
+                    <span>Đã booking</span>
                 </div>
-               
+            </div>
+
+            <div class="mt-6">
+                <div class="px-2 pb-2 text-gray-500">
+                    Khách hàng - Nhân viên
+                </div>
+                <div onclick="setContent('userBarBtn')"
+                    class="px-6 py-2 flex items-center text-gray-400 hover:bg-gray-800" btn="userBarBtn">
+                    <span>Người dùng</span>
+                </div>
             </div>
 
             <!-- Upcoming Events -->
             <div class="mt-6">
-                <div class="px-4 pb-2 text-xs text-gray-500">
-                    Upcoming Events
+                <div class="px-2 pb-2 text-gray-500">
+                    Quản lý truy cập
                 </div>
-                <div class="px-4 py-2 text-gray-400 hover:bg-gray-800">
-                    Bear Hug: Live in Concert
+                <div onclick="setContent('roleBarBtn')"
+                    class="px-6 py-2 flex items-center text-gray-400 hover:bg-gray-800" btn="roleBarBtn">
+                    <span>Vai trò</span>
                 </div>
-                <div class="px-4 py-2 text-gray-400 hover:bg-gray-800">
-                    Viking People
-                </div>
-                <div class="px-4 py-2 text-gray-400 hover:bg-gray-800">
-                    Six Fingers — DJ Set
-                </div>
-                <div class="px-4 py-2 text-gray-400 hover:bg-gray-800">
-                    We All Look The Same
+                <div onclick="setContent('accountBarBtn')"
+                    class="border-l-2 border-amber-600 px-6 py-2 flex items-center bg-gradient-to-r from-gray-800 to-transparent" btn="accountBarBtn">
+
+                    <span>Tài khoảng</span>
                 </div>
             </div>
         </div>
 
-        <!-- Support
-        <div class="p-4 border-t border-gray-700 flex items-center text-gray-400">
-            <i class="fas fa-question-circle mr-3"></i>
-            <span>Support</span>
-        </div> -->
+
+        <div class="py-4 border-t border-gray-700 flex items-center text-gray-400">
+            <div onclick="logoutApp()" class="px-6 py-2 flex w-full items-center text-gray-400 hover:bg-gray-800">
+                <span>Đăng xuất</span>
+            </div>
+        </div>
 
 
     </div>
 
     <!-- Main Content -->
-     
+
     <div class="flex flex-1 bg-amber-300 overflow-y-auto" id="main-content">
         <!-- Orders content would go here -->
     </div>
+    <div id="notification-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
     <script type="module" src="js/index.js"></script>
 </body>
 

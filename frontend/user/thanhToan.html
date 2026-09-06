@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vietnam Airlines - Thanh toán</title>
+    <link rel="stylesheet" href="css/thanhToan.css">
+    <script src="js/include.js"></script>
+
+</head>
+
+<body>
+    <div data-include="share/header.html"></div>
+
+    <!-- Flight Info Header -->
+    <div class="flight-info-header">
+        <div class="flight-info" id="flight-info-header">
+            <!-- Sẽ được render bằng JavaScript -->
+        </div>
+    </div>
+
+    <!-- Success Badge -->
+    <div class="success-badge">
+        ✈️ Thanh toán
+    </div>
+
+    <!-- Airplane Background -->
+    <svg class="airplane-bg" viewBox="0 0 200 100" fill="none">
+        <path d="M20 50 L180 30 L170 35 L180 50 L170 65 L180 70 L20 50 Z" fill="#0066cc" opacity="0.6" />
+        <circle cx="60" cy="45" r="8" fill="#ff6b35" opacity="0.8" />
+        <circle cx="100" cy="42" r="8" fill="#ffa500" opacity="0.8" />
+        <circle cx="140" cy="40" r="8" fill="#28a745" opacity="0.8" />
+    </svg>
+
+    <div class="main-content">
+        <!-- Left Panel -->
+        <div class="left-panel">
+            <!-- Flight Details Section -->
+            <div class="section">
+                <h3>📋 Chi tiết chuyến bay</h3>
+                <div id="flight-details-section">
+                    <!-- Sẽ được render bằng JavaScript -->
+                </div>
+            </div>
+
+            <!-- Customer Information Section -->
+            <div class="section">
+                <h3>👥 Thông tin hành khách</h3>
+                <div id="section-customers">
+                    <!-- Sẽ được render bằng JavaScript -->
+                </div>
+            </div>
+
+            <div class="notice">
+                <div class="notice-title">📋 Điều khoản và lưu ý</div>
+                <p><strong>Lưu ý:</strong> Vietnam Airlines đặt yêu cầu thanh toán tại Việt Nam. Tùy theo chính sách của
+                    mình, ngân hàng phát hành thẻ có thể tính phí thêm với giao dịch của Quý khách. Vietnam Airlines sẽ
+                    hoàn trả khi hợp lệ nếu khách hàng yêu cầu hủy trong vòng 24 giờ từ thời điểm đặt vé.</p>
+
+                <p>Vui lòng kiểm tra lại thông tin trước khi thanh toán.</p>
+
+                <p>Sau khi thanh toán thành công, Quý khách sẽ được chuyển đến trang xác nhận đặt chỗ. Email xác nhận sẽ
+                    được gửi cho Quý khách trong vòng 1 giờ. Hotline hỗ trợ: 1900-1900 hoặc +84-24-38320320.</p>
+            </div>
+
+            <div class="pricing-section">
+                <div class="total-price">
+                    <span>Tổng số tiền:</span>
+                    <span><span id="total-price">0</span> VND</span>
+                </div>
+                <div class="price-details">
+                    Tổng giá cho tất cả các hành khách (đã bao gồm thuế, phí và chi tiêu khác)
+                </div>
+                <a href="#" class="expand-details">📦 Chọn dịch vụ hành lý ↗</a>
+            </div>
+
+            <div class="voucher-section">
+                <a href="#" class="voucher-link">🎫 Quý khách có muốn sử dụng mã khuyến mãi không?</a>
+            </div>
+        </div>
+
+        <!-- Right Panel - Payment Methods -->
+        <div class="right-panel">
+            <h2 class="payment-title">💳 Chọn phương thức thanh toán</h2>
+
+            <div class="voucher-reminder">
+                <strong>🎁 Quý khách có muốn sử dụng Evoucher (Phiếu quà tặng) không?</strong>
+            </div>
+
+            <div class="payment-methods">
+                <!-- Credit Card -->
+                <div class="payment-option selected" data-method="credit-card" onclick="selectPayment(this)">
+                    <div class="payment-header">
+                        <svg class="payment-icon" viewBox="0 0 24 24" fill="#007bff">
+                            <rect x="2" y="4" width="20" height="16" rx="2" fill="none" stroke="currentColor"
+                                stroke-width="2" />
+                            <line x1="2" y1="10" x2="22" y2="10" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                        <span class="payment-name">Thẻ tín dụng</span>
+                        <div class="card-logos">
+                            <img src="data:image/svg+xml,%3Csvg viewBox='0 0 40 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='40' height='24' rx='4' fill='%231434CB'/%3E%3Ctext x='20' y='15' text-anchor='middle' fill='white' font-size='8' font-weight='bold'%3EVISA%3C/text%3E%3C/svg%3E"
+                                class="card-logo" alt="Visa">
+                            <img src="data:image/svg+xml,%3Csvg viewBox='0 0 40 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='40' height='24' rx='4' fill='%23EB001B'/%3E%3Ctext x='20' y='15' text-anchor='middle' fill='white' font-size='6' font-weight='bold'%3EMC%3C/text%3E%3C/svg%3E"
+                                class="card-logo" alt="Mastercard">
+                            <img src="data:image/svg+xml,%3Csvg viewBox='0 0 40 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='40' height='24' rx='4' fill='%23006FCF'/%3E%3Ctext x='20' y='15' text-anchor='middle' fill='white' font-size='6' font-weight='bold'%3EJCB%3C/text%3E%3C/svg%3E"
+                                class="card-logo" alt="JCB">
+                            <img src="data:image/svg+xml,%3Csvg viewBox='0 0 40 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='40' height='24' rx='4' fill='%23DC143C'/%3E%3Ctext x='20' y='15' text-anchor='middle' fill='white' font-size='6' font-weight='bold'%3EUATP%3C/text%3E%3C/svg%3E"
+                                class="card-logo" alt="UATP">
+                        </div>
+                        <div class="radio-circle"></div>
+                    </div>
+                </div>
+
+                <!-- E-Wallet -->
+                <div class="payment-option" data-method="shopee-pay" onclick="selectPayment(this)">
+                    <div class="payment-header">
+                        <svg class="payment-icon" viewBox="0 0 24 24" fill="#FF4444">
+                            <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor"
+                                stroke-width="2" />
+                            <path d="M7 8h10M7 12h10M7 16h6" stroke="currentColor" stroke-width="1.5" />
+                        </svg>
+                        <span class="payment-name">ShopeePay</span>
+                        <div class="radio-circle"></div>
+                    </div>
+                </div>
+
+                <!-- Union Pay -->
+                <div class="payment-option" data-method="union-pay" onclick="selectPayment(this)">
+                    <div class="payment-header">
+                        <svg class="payment-icon" viewBox="0 0 24 24" fill="#0066CC">
+                            <rect x="2" y="4" width="20" height="16" rx="2" fill="none" stroke="currentColor"
+                                stroke-width="2" />
+                            <circle cx="8" cy="12" r="2" fill="currentColor" />
+                            <path d="M16 8h2M16 12h2M16 16h2" stroke="currentColor" stroke-width="1.5" />
+                        </svg>
+                        <span class="payment-name">UnionPay card</span>
+                        <div class="radio-circle"></div>
+                    </div>
+                </div>
+
+                <!-- Bank Transfer -->
+                <div class="payment-option" data-method="bank-transfer" onclick="selectPayment(this)">
+                    <div class="payment-header">
+                        <svg class="payment-icon" viewBox="0 0 24 24" fill="#28a745">
+                            <path d="M3 21h18M4 18h16M6 18V9l6-4 6 4v9M10 12h4" stroke="currentColor" stroke-width="2"
+                                fill="none" />
+                        </svg>
+                        <span class="payment-name">Chuyển khoản ngân hàng</span>
+                        <div class="radio-circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Button -->
+    <button class="payment-button" onclick="showConfirmModal()">
+        💳 Thanh toán ngay
+    </button>
+
+    <!-- Confirmation Modal -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal">
+            <div class="modal-title">✅ Xác nhận thanh toán</div>
+            <div class="modal-content">
+                Bạn có chắc chắn muốn thanh toán với phương thức:
+                <div class="selected-method" id="selectedMethodDisplay">
+                    <span id="selectedMethodName">Thẻ tín dụng</span>
+                </div>
+                Tổng số tiền: <strong id="modal-total-price">₫1.296.000 VND</strong>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" onclick="hideConfirmModal()">❌ Hủy</button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmPayment()">✅ Xác nhận</button>
+            </div>
+        </div>
+    </div>
+    <div data-include="share/footer.html"></div>
+
+</body>
+<script type="module" src="js/DOM/thanhToan.js"></script>
+
+</html>

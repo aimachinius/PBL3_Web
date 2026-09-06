@@ -1,0 +1,134 @@
+<div class="relative w-full mx-auto p-4 min-h-screen overflow-y-auto bg-amber-50">
+    <h2 class="text-xl font-bold mb-4">Tạo booking</h2>
+
+    <form id="bookingForm" class="space-y-6">
+        <!-- Phương thức thanh toán -->
+        <div class="bg-white p-4 rounded-lg shadow">
+            <h3 class="font-semibold mb-3">Phương thức thanh toán</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <label class="flex items-center space-x-2">
+                    <input type="radio" name="paymentMethod" value="credit" class="form-radio">
+                    <span>Thẻ tín dụng</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                    <input type="radio" name="paymentMethod" value="banking" class="form-radio">
+                    <span>Chuyển khoản</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Loại chuyến bay -->
+        <div class="bg-white p-4 rounded-lg shadow">
+            <h3 class="font-semibold mb-3">Loại chuyến bay</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <label class="flex items-center space-x-2">
+                    <input type="radio" name="flightType" value="economy" class="form-radio">
+                    <span>Phổ thông</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                    <input type="radio" name="flightType" value="business" class="form-radio">
+                    <span>Thương gia</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Form tìm chuyến bay -->
+        <div class="bg-white p-4 rounded-lg shadow">
+            <h3 class="font-semibold mb-3">Tìm chuyến bay</h3>
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="form-group">
+                        <label class="block text-sm font-medium text-gray-700">Điểm khởi hành</label>
+                        <select id="diemkhoihanh" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            <option value="">Chọn điểm khởi hành</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="block text-sm font-medium text-gray-700">Điểm đến</label>
+                        <select id="diemden" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            <option value="">Chọn điểm đến</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2">
+                    <input type="checkbox" id="roundTrip" class="form-checkbox">
+                    <label for="roundTrip" class="text-sm font-medium text-gray-700">Chuyến bay khứ hồi</label>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="form-group">
+                        <label class="block text-sm font-medium text-gray-700">Ngày đi</label>
+                        <input type="date" id="ngaydi" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label class="block text-sm font-medium text-gray-700">Ngày về</label>
+                        <input type="date" id="ngayve" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                            disabled>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="form-group">
+                        <label class="block text-sm font-medium text-gray-700">Người lớn</label>
+                        <input type="number" id="nguoilon" min="1" value="1"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="block text-sm font-medium text-gray-700">Trẻ em (2-12 tuổi)</label>
+                        <input type="number" id="treemtuhaituoi" min="0" value="0"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    </div>
+                    <div class="form-group">
+                        <label class="block text-sm font-medium text-gray-700">Trẻ em dưới 2 tuổi</label>
+                        <input type="number" id="treemduoihaituoi" min="0" value="0"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    </div>
+                </div>
+
+                <button type="button" id="searchFlights"
+                    class="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    Tìm chuyến bay
+                </button>
+            </div>
+        </div>
+
+        <!-- Danh sách hành khách -->
+        <div class="bg-white p-4 rounded-lg shadow">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="font-semibold">Danh sách hành khách</h3>
+                <button type="button" id="addPassenger"
+                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    Thêm hành khách
+                </button>
+            </div>
+            <div id="passengerList" class="space-y-4">
+                <!-- Sẽ được thêm bằng JavaScript -->
+            </div>
+        </div>
+
+        <!-- Chọn ghế -->
+        <div class="bg-white p-4 rounded-lg shadow">
+            <h3 class="font-semibold mb-3">Chọn ghế</h3>
+            <div id="seatSelection" class="grid grid-cols-6 gap-2">
+                <!-- Sẽ được tạo bằng JavaScript -->
+            </div>
+        </div>
+
+        <!-- Chọn ghế về (ẩn mặc định) -->
+        <div id="returnSeatSection" class="bg-white p-4 rounded-lg shadow hidden">
+            <h3 class="font-semibold mb-3">Chọn ghế về</h3>
+            <div id="returnSeatSelection" class="grid grid-cols-6 gap-2">
+                <!-- Sẽ được tạo bằng JavaScript -->
+            </div>
+        </div>
+
+        <!-- Nút xác nhận -->
+        <div class="flex justify-end">
+            <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">
+                Xác nhận đặt vé
+            </button>
+        </div>
+    </form>
+</div>

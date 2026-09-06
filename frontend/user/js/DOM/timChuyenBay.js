@@ -1,4 +1,4 @@
-import { getAllLocation } from "../../../../APIs/location.js"
+import { getAllLocation } from "../../../APIs/location.js"
 
 let checkisKhuHoi = document.getElementById("la-khu-hoi")
 let ngayVeInputBox = document.getElementById("ngayve");
@@ -45,8 +45,8 @@ document.getElementById('form-find-chuyen-bay').addEventListener('submit', funct
         departureDate: f['ngaydi'].value,
         returnDate: f['ngayve'].value,
         adultNumber: f['nguoilon'].value,
-        childNumber: f['treemtuhaituoi'].value,
-        infantNumber: f['treemduoihaituoi'].value
+        // childNumber: f['treemtuhaituoi'].value,
+        // infantNumber: f['treemduoihaituoi'].value
     }));
     window.location.href = 'danhSachChuyenBay.html';
 });

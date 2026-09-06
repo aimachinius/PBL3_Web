@@ -5,7 +5,7 @@
 }
 
 header {
-    background-color: #fff;
+    background-color: #333;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
@@ -51,7 +51,7 @@ header {
 }
 
 .main-nav a {
-    color: #333;
+    color: #fffdfd;
     text-decoration: none;
     font-weight: bold;
     text-transform: uppercase;

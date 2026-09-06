@@ -1,0 +1,77 @@
+<div class="relative w-full mx-auto p-4 min-h-screen bg-amber-50">
+    <h2 class="text-xl font-bold mb-4">Quản lý đơn đặt vé</h2>
+
+    <!-- Phần tìm kiếm -->
+    <div class="flex gap-4 mb-4">
+        <!-- <div class="flex-1">
+            <input type="text" id="search-customer-id" placeholder="Tìm kiếm theo ID khách hàng..."
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-green-500">
+        </div> -->
+        <div class="flex-1">
+            <input type="date" id="from-date"
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-green-500">
+        </div>
+        <div class="flex-1">
+            <input type="date" id="to-date"
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-green-500">
+        </div>
+        <button id="search-btn" class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600">
+            Tìm kiếm
+        </button>
+    </div>
+    <!-- <div class="flex gap-4 mb-1 mt-8">
+        <button id="add-account-btn" class="bg-green-500 text-white py-2 px-4 rounded mb-4">Xem chi tiết</button>
+    </div> -->
+
+    <!-- Bảng hiển thị danh sách đơn đặt vé -->
+    <table class="w-full table-auto border border-gray-300" id="table-booking">
+        <thead>
+            <tr class="bg-green-500">
+                <th class="border px-2 py-1">ID</th>
+                <th class="border px-2 py-1">Khách hàng</th>
+                <th class="border px-2 py-1">Ngày thanh toán</th>
+                <th class="border px-2 py-1">Phương thức thanh toán</th>
+                <th class="border px-2 py-1">Tổng tiền</th>
+            </tr>
+        </thead>
+        <tbody id="booking-table-body"></tbody>
+    </table>
+
+    <!-- Form chi tiết đơn đặt vé -->
+    <div id="booking-detail-container"
+        class="flex justify-center items-center absolute inset-0 bg-black/30 backdrop-blur-sm z-50 hidden">
+        <div class="w-full max-w-4xl p-8 bg-white rounded-2xl shadow-xl">
+            <h2 class="text-2xl font-semibold text-center mb-8">Chi tiết đơn đặt vé</h2>
+
+            <div class="w-full max-h-[70vh] overflow-y-auto">
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <h3 class="text-lg font-medium mb-2">Thông tin khách hàng</h3>
+                        <div id="customer-info" class="space-y-2">
+                            <!-- Thông tin khách hàng sẽ được điền bằng JavaScript -->
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-medium mb-2">Thông tin thanh toán</h3>
+                        <div id="payment-info" class="space-y-2">
+                            <!-- Thông tin thanh toán sẽ được điền bằng JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <h3 class="text-lg font-medium mb-4">Danh sách vé</h3>
+                    <div id="tickets-list" class="flex gap-4 overflow-x-auto">
+                        <!-- Danh sách vé sẽ được điền bằng JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-4 mt-8">
+                <button id="close-detail-btn" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600">
+                    Đóng
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

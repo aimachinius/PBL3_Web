@@ -13,7 +13,7 @@
        
         /* Hero Section */
         .hero {
-            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/api/placeholder/1200/600');
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/img/img_1.jpg');
             background-size: cover;
             background-position: center;
             height: 500px;

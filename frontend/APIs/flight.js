@@ -1,75 +1,96 @@
 import { BASE_URL } from "./init.js";
+import axios from 'axios';
 
 const API_BASE = BASE_URL + '/flight';
 
 
 // Lấy thông tin 1 chuyến bay theo ID
 export async function getFlightById(id) {
-    const res = await fetch(`${API_BASE}/${id}`);
-    return await res.json();
+  const res = await axios.get(`${API_BASE}/${id}`, {
+    withCredentials: true
+  });
+  return res.data;
 }
 
 // Thêm chuyến bay mới
 export async function addFlight(flight) {
-    await fetch(API_BASE, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(flight)
-    });
+  await axios.post(API_BASE, flight, {
+    headers: { "Content-Type": "application/json" },
+    withCredentials: true
+  });
 }
 
 // Cập nhật chuyến bay theo ID
 export async function updateFlight(id, flight) {
-    await fetch(`${API_BASE}/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(flight)
-    });
+  await axios.put(`${API_BASE}/${id}`, flight, {
+    headers: { "Content-Type": "application/json" },
+    withCredentials: true
+  });
 }
 
 // Xoá chuyến bay theo ID
 export async function deleteFlight(id) {
-    await fetch(`${API_BASE}/${id}`, {
-        method: "DELETE"
-    });
+  await axios.delete(`${API_BASE}/${id}`, {
+    withCredentials: true
+  });
 }
 
 
 export async function getAllFlights() {
-    const res = await fetch(API_BASE + '/all_flights');
-    return await res.json();
+  const res = await axios.get(API_BASE + '/all_flights', {
+    withCredentials: true
+  });
+  return res.data;
+}
+
+export async function getFlightSeatsByFlightId(flightId) {
+  const response = await axios.get(API_BASE + '/flight_seats?flightId=' + flightId, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    withCredentials: true
+  });
+  return response.data;
+}
+
+//tìm tat cac cac chuyen bayy
+export async function findFlight(fromLocationId, toLocationId, departureDate) {
+  const bEUrl = API_BASE + '/find_flight';
+  const params = {
+    fromLocationId,
+    toLocationId,
+    departureDate,
+  };
+
+  const queryString = new URLSearchParams(params).toString();
+  const finalUrl = `${bEUrl}?${queryString}`;
+
+  try {
+    const response = await axios.get(finalUrl, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true
+    });
+
+    return response.data;
+
+  } catch (e) {
+    console.error('error: of get flight');
   }
-  
-  //tìm tat cac cac chuyen bayy
-  export async function findFlight(fromLocationId,toLocationId,departureDate) {
-      const bEUrl = API_BASE + '/find_flight' ;
-    const params = {
-      fromLocationId,
-      toLocationId,
-      departureDate,
-    };
-    
-    const queryString = new URLSearchParams(params).toString();
-    const finalUrl = `${bEUrl}?${queryString}`;
-  
-    try {
-      const response = await fetch(finalUrl, {
-        method: "GET",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-  
-      const data = await response.json();
-      return data;
-  
-      }catch(e){
-          console.error('error: of get flight');
-      }
-      return [];
-      
+  return [];
+}
+
+export async function getFlightInformation(flightId) {
+  try {
+    const response = await axios.get(`${API_BASE}/${flightId}/information`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
   }
+}

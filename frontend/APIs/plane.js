@@ -1,61 +1,64 @@
 import {BASE_URL} from "./init.js"
 const API_BASE = BASE_URL + '/plane';
+import axios from 'axios';
 
 // Lấy danh sách tất cả máy bay
 export async function getAllPlanes() {
     try {
-        const res = await fetch(API_BASE + '/all_plane');
-        return await res.json();
+        const res = await axios.get(API_BASE + '/all_plane', {
+            withCredentials: true
+        });
+        return res.data;
+
     } catch (error) {
-        console.error("Lỗi khi lấy danh sách máy bay:", error);
+        throw error;
     }
-    return [];
 }
 
 // Lấy thông tin 1 máy bay theo ID
 export async function getPlaneById(id) {
     try {
-        const res = await fetch(`${API_BASE}/${id}`);
-        return await res.json();
+        const res = await axios.get(`${API_BASE}/${id}`, {
+            withCredentials: true
+        });
+        return res.data;
     } catch (error) {
-        console.error("Lỗi khi lấy thông tin máy bay:", error);
+        throw error;
     }
-    return null;
 }
 
 // Thêm máy bay mới
 export async function addPlane(plane) {
     try {
-        await fetch(API_BASE, {
-            method: "POST",
+        await axios.post(API_BASE, plane, {
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(plane)
+            withCredentials: true
         });
     } catch (error) {
-        console.error("Lỗi khi thêm máy bay:", error);
+        throw error;
     }
 }
 
 // Cập nhật máy bay
 export async function updatePlane(plane) {
     try {
-        await fetch(API_BASE, {
-            method: "PUT", 
+        await axios.put(API_BASE, plane, {
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(plane)
+            withCredentials: true
         });
     } catch (error) {
-        console.error("Lỗi khi cập nhật máy bay:", error);
+        throw error;
     }
 }
 
 // Xóa máy bay theo ID
 export async function deletePlane(id) {
     try {
-        await fetch(`${API_BASE}/${id}`, {
-            method: "DELETE"
+       const response = await axios.delete(`${API_BASE}/${id}`, {
+            withCredentials: true
         });
+        return response.data;
     } catch (error) {
-        console.error("Lỗi khi xóa máy bay:", error);
+        throw error;
     }
 }

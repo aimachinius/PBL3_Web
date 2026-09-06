@@ -1,0 +1,114 @@
+<div class="w-full mx-auto p-4 min-h-screen bg-amber-50 overflow-y-auto">
+    <h2 class="text-2xl font-bold mb-6">Hồ sơ người dùng</h2>
+
+    <!-- Thông tin người dùng -->
+    <div class="bg-white rounded-2xl shadow-lg p-6 max-w-4xl mx-auto mb-10 relative">
+        <h3 class="text-xl font-semibold mb-4">Thông tin người dùng</h3>
+        <div class="grid grid-cols-2 gap-6">
+            <div>
+                <label class="font-medium">Họ và tên</label>
+                <input type="text" id="fullName" class="border rounded-lg px-4 py-2 w-full bg-gray-100" disabled />
+            </div>
+            <div>
+                <label class="font-medium">Số điện thoại</label>
+                <input type="tel" id="phone" class="border rounded-lg px-4 py-2 w-full bg-gray-100" disabled />
+            </div>
+            <div>
+                <label class="font-medium">Email</label>
+                <input type="email" id="email" class="border rounded-lg px-4 py-2 w-full bg-gray-100" disabled />
+            </div>
+            <div>
+                <label class="font-medium">CCCD</label>
+                <input type="text" id="cardNumber" class="border rounded-lg px-4 py-2 w-full bg-gray-100" disabled />
+            </div>
+            <div>
+                <label class="font-medium">Địa chỉ</label>
+                <input type="text" id="address" class="border rounded-lg px-4 py-2 w-full bg-gray-100" disabled />
+            </div>
+            <div>
+                <label class="font-medium">Giới tính</label>
+                <select id="sex" class="border rounded-lg px-4 py-2 w-full bg-gray-100" disabled>
+                    <option>Chọn</option>
+                    <option value="MALE">Nam</option>
+                    <option value="FEMALE">Nữ</option>
+                </select>
+            </div>
+            <div>
+                <label class="font-medium">Ngày sinh</label>
+                <input type="date" id="dayOfBirth" class="border rounded-lg px-4 py-2 w-full bg-gray-100" disabled />
+            </div>
+        </div>
+
+        <div class="flex justify-end gap-2 mt-6">
+            <button id="edit-user-info-btn" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Chỉnh
+                sửa</button>
+            <button id="save-user-info-btn"
+                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 hidden">Lưu</button>
+        </div>
+    </div>
+
+    <!-- Tài khoản -->
+    <div class="bg-white rounded-2xl shadow-lg p-6 max-w-4xl mx-auto mb-10 relative">
+        <h3 class="text-xl font-semibold mb-4">Thông tin tài khoản</h3>
+        <div class="grid grid-cols-1 gap-6">
+            <div>
+                <label class="font-medium">Tên đăng nhập</label>
+                <input type="text" id="username" class="border rounded-lg px-4 py-2 w-full bg-gray-100" disabled />
+            </div>
+            <div class="flex flex-col w-full">
+                <div class="flex flex-col">
+                    <label class="font-medium">vai trò</label>
+                    <input type="text" id="role-name" class="border rounded-lg px-4 py-2 bg-gray-100" disabled />
+                </div>
+
+                <div class="flex justify-between  mt-4">
+                    <!-- Nhãn bên trái -->
+                    <label class="font-medium whitespace-nowrap mr-4">Các quyền quản lý:</label>
+                  
+                    <!-- Quyền ở bên phải (dễ căn chỉnh, có thể xuống dòng nếu nhiều) -->
+                    <div id="permissions" class="flex flex-wrap gap-2">
+                      <label class="border-2 border-blue-600 bg-blue-200 text-blue-800 rounded-xl px-3 py-1">
+                        bán vé số
+                      </label>
+                      <!-- Có thể thêm nhiều quyền nữa -->
+                      <!--
+                      <label class="border-2 border-green-600 bg-green-200 text-green-800 rounded-xl px-3 py-1">
+                        quản lý tài khoản
+                      </label>
+                      -->
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg p-6 max-w-4xl mx-auto relative">
+        <h3 class="text-xl font-semibold mb-4">Đổi mật khẩu</h3>
+        <div class="grid grid-cols-2 gap-6">
+
+            <div>
+                <label class="font-medium">Mật khẩu hiện tại</label>
+                <input type="password" id="currentPassword" class="border rounded-lg px-4 py-2 w-full bg-gray-100"
+                    disabled />
+            </div>
+            <div></div>
+            <div>
+                <label class="font-medium">Mật khẩu mới</label>
+                <input type="password" id="password" class="border rounded-lg px-4 py-2 w-full bg-gray-100" disabled />
+            </div>
+            <div>
+                <label class="font-medium">Xác nhận mật khẩu mới</label>
+                <input type="password" id="confirmPassword" class="border rounded-lg px-4 py-2 w-full bg-gray-100"
+                    disabled />
+            </div>
+
+        </div>
+
+        <div class="flex justify-end gap-2 mt-6">
+            <button id="edit-account-btn" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Đổi mật
+                khẩu</button>
+            <button id="save-account-btn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 hidden">Lưu
+                mật khẩu</button>
+        </div>
+    </div>
+</div>

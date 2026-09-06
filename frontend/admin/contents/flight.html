@@ -1,28 +1,82 @@
-<div class="relative w-full mx-auto p-4 min-h-screen bg-amber-50">
-    <h2 class="text-xl font-bold mb-4">Quản lý vé máy bay</h2>
+<style>
+    .seat {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        border: 2px solid transparent;
+        position: relative;
+    }
+
+    .seat:hover {
+        transform: scale(1.05);
+        transition: transform 0.2s;
+    }
+
+    .seat-booked-business {
+        background-color: #ddb609;
+        color: white;
+        border-color: rgb(255, 208, 0);
+    }
+
+    .seat-booked-economy {
+        background-color: #3c4594;
+        color: #374151;
+        border-color: #0018f3;
+    }
+
+    .seat-not-booked-business {
+        background-color: #e5e7eb;
+        color: #92400e;
+        border-color: rgb(255, 208, 0);
+    }
+
+    .seat-not-booked-economy {
+        background-color: #e5e7eb;
+        color: #991b1b;
+        border-color: #0018f3;
+    }
+</style>
+<div class="relative w-full mx-auto p-4 min-h-screen bg-amber-50 overflow-y-auto">
+    <h2 class="text-xl font-bold mb-4">Quản lý chuyến bay</h2>
 
     <!-- Nút thêm máy bay -->
     <div class="flex space-x-4 mb-4">
-        <button id="view-seat-map-btn" class="bg-green-500 text-white py-2 px-4 rounded mb-4">Xem sơ đồ ghế</button>
-        <button id="add-plane-btn" class="bg-green-500 text-white py-2 px-4 rounded mb-4">Thêm vé máy bay</button>
-        <button id="edit-plane-btn" class="bg-blue-500 text-white py-2 px-4 rounded mb-4">Chỉnh sửa</button>
-        <button id="remove-plane-btn" class="bg-red-500 text-white py-2 px-4 rounded mb-4">Xóa</button>
+        <button id="view-seat-map-btn" class="bg-blue-500 text-white py-2 px-4 rounded mb-4">Xem sơ đồ ghế</button>
+        <button id="view-flight-btn" class="bg-blue-500 text-white py-2 px-4 rounded mb-4">Xem chuyến bay</button>
+        <button id="add-flight-btn" class="bg-blue-500 text-white py-2 px-4 rounded mb-4">Thêm chuyến bay</button>
+        <button id="edit-flight-btn" class="bg-blue-500 text-white py-2 px-4 rounded mb-4">Chỉnh sửa</button>
+        <button id="remove-flight-btn" class="bg-red-500 text-white py-2 px-4 rounded mb-4">Xóa</button>
     </div>
-    <table class="w-full table-auto border border-gray-300" id="table-plane">
-        <thead>
-            <tr class="bg-green-500">
-                <th class="border px-2 py-1">Máy bay</th>
-                <th class="border px-2 py-1">Từ</th>
-                <th class="border px-2 py-1">Đến</th>
-                <th class="border px-2 py-1">Thời gian bay</th>
-                <th class="border px-2 py-1">Dự kiến mất</th>
-                <th class="border px-2 py-1">Giá thương gia</th>
-                <th class="border px-2 py-1">Giá phố Thông</th>
-                <th class="border px-2 py-1">Số Khách đặt</th>
-            </tr>
-        </thead>
-        <tbody id="plane-table-body"></tbody>
-    </table>
+    <div >
+        <h4 ><b>Bộ lọc</b></h4>
+        <div class="flex space-x-4 mb-4 mt-0.5">
+            <button id="filter-all-btn" class="bg-blue-500 text-white py-2 px-4 rounded mb-4">Tất cả</button>
+            <button id="filter-upcoming-btn" class="bg-blue-500 text-white py-2 px-4 rounded mb-4">Chưa bay</button>
+            <button id="filter-past-btn" class="bg-blue-500 text-white py-2 px-4 rounded mb-4">Đã bay</button>
+        </div>
+
+        <table class="w-full table-auto border border-gray-300" id="table-plane">
+            <thead>
+                <tr class="bg-green-500">
+                    <th class="border px-2 py-1">Mã chuyến bay</th>
+                    <th class="border px-2 py-1">Máy bay</th>
+                    <th class="border px-2 py-1">Từ</th>
+                    <th class="border px-2 py-1">Đến</th>
+                    <th class="border px-2 py-1">Thời gian bay</th>
+                    <th class="border px-2 py-1">Dự kiến mất</th>
+                    <th class="border px-2 py-1">Giá thương gia</th>
+                    <th class="border px-2 py-1">Giá phổ thông</th>
+                </tr>
+            </thead>
+            <tbody id="plane-table-body"></tbody>
+        </table>
+    </div>
 
 
     <!-- Box nhập liệu -->
@@ -33,13 +87,14 @@
             <h2 id="form-title" class="col-span-2 text-2xl font-semibold text-center mb-4"></h2>
 
             <!-- Trong form #plane-form -->
-
-            <label class="col-span-2 flex flex-col">
-                <span class="mb-1 font-medium">Máy bay phục vụ</span>
-                <select id="mayBay" required class="border rounded-lg px-4 py-2">
-                    <option value="" disabled selected>Chọn máy bay</option>
-                </select>
-            </label>
+            <div id="box-input-plane">
+                <label class="col-span-2 flex flex-col">
+                    <span class="mb-1 font-medium">Máy bay phục vụ</span>
+                    <select id="mayBay" required class="border rounded-lg px-4 py-2">
+                        <option value="" disabled selected>Chọn máy bay</option>
+                    </select>
+                </label>
+            </div>
 
             <label class="col-span-2 flex flex-col">
                 <span class="mb-1 font-medium">Từ (địa điểm)</span>
@@ -84,45 +139,118 @@
         </form>
     </div>
 
-    <div id="seat-map-view-container"
-        class="flex justify-center items-center absolute inset-0 bg-black/30 backdrop-blur-sm z-50 hidden">
-        <div id="seat-map-parent-container"
-            class="flex flex-col items-center w-full max-w-xl max-h-4/5 ml-3 h-full rounded-2xl p-4">
+    <div id="view-map-seat-container"
+        class="flex  justify-center items-center absolute inset-0 bg-black/30 backdrop-blur-sm z-50 hidden">
+        <div id="view-map-seat-content-container"
+            class="flex flex-col items-center w-full max-w-3/6 max-h-4/5 ml-3 h-full rounded-2xl p-4">
 
-            <div class="flex justify-around items-center w-full h-16 bg-amber-50 rounded-xl mb-4">
-                <div id="vip-seat"
-                    class=" text-xs font-semibold border-2 bg-yellow-500 hover:bg-amber-100 border-black rounded-lg p-2">
-                    Ghế thương gia</div>
-                <div id="economy-seat"
-                    class=" text-xs font-semibold border-2 bg-blue-400 hover:bg-amber-100 border-black rounded-lg p-2">
-                    Ghế phổ thông</div>
-                <div id="no-seat"
-                    class=" text-xs font-semibold border-2 bg-amber-100     hover:bg-amber-100 border-black rounded-lg p-2">
-                    Không chọn</div>
+            <!-- mô ta chi tiet -->
+            <div class="flex justify-around items-center w-full h-16 bg-amber-50 rounded-xl mb-4 p-4">
+                <div class="flex flex-col">
+                    <div class="seat seat-booked-business">
+                    </div>
+                    <div class="text-sm">
+                        Thương gia đã chọn
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <div class="seat seat-booked-economy">
+                    </div>
+                    <div class="text-sm">
+                        Phổ thông đã chọn
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <div class="seat seat-not-booked-business">
+                    </div>
+                    <div class="text-sm">
+                        Thương gia trống
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <div class="seat seat-not-booked-economy">
+                    </div>
+                    <div class="text-sm">
+                        Phổ thông trống
+                    </div>
+                </div>
             </div>
 
             <div id="seat-map-container" class="w-full h-full overflow-auto"></div>
-            <!-- Header chữ cái -->
-            <!-- <div class="flex w-full mb-4">
-                <div class="w-10"></div> Cột trống để cân số hàng -->
-            <!-- <div id="header-seat-map" class=" flex justify-around flex-1 w-full">
-                </div>
-            </div> -->
-            <div class="flex flex-col items-center w-full bg-amber-50 rounded-xl mt-4 p-4">
-                <div class="flex gap-4">
-                    <div class="text-sm">
-                        Số ghế thương gia: <span id="vip-seat-count" class="font-semibold">0</span>
+            <!-- tao map trong js -->
+            <div id="infor-Seat-map-Div">
+                <!-- tao infor torng js -->
+            </div>
+
+        </div>
+    </div>
+
+    <div id="view-flight-container"
+        class="flex justify-center items-center absolute inset-0 bg-black/30 backdrop-blur-sm z-50 hidden">
+        <div id="view-flight-content"
+            class="grid grid-cols-2 gap-4 w-full max-w-xl p-8 bg-white rounded-2xl shadow-xl text-gray-800">
+            <h2 id="form-title" class="col-span-2 text-2xl font-semibold text-center mb-4">Thông tin chuyến bay</h2>
+
+            <div class="col-span-2 flex flex-col">
+                <span class="mb-1 font-medium">Máy bay phục vụ</span>
+                <div class="border rounded-lg px-4 py-2 bg-gray-50" id="mayBay"></div>
+            </div>
+
+            <div class="col-span-2 flex flex-col">
+                <span class="mb-1 font-medium">Từ (địa điểm)</span>
+                <div class="border rounded-lg px-4 py-2 bg-gray-50" id="from"></div>
+            </div>
+
+            <div class="col-span-2 flex flex-col">
+                <span class="mb-1 font-medium">Đến (địa điểm)</span>
+                <div class="border rounded-lg px-4 py-2 bg-gray-50" id="to"></div>
+            </div>
+
+            <div class="flex flex-col col-span-2">
+                <span class="mb-1 font-medium">Ngày và giờ bay</span>
+                <div class="border rounded-lg px-4 py-2 bg-gray-50" id="departureDate"></div>
+            </div>
+
+            <div class="flex flex-col">
+                <span class="mb-1 font-medium">Thời gian bay (phút)</span>
+                <div class="border rounded-lg px-4 py-2 bg-gray-50" id="durationMinutes"></div>
+            </div>
+
+            <div class="flex flex-col">
+                <span class="mb-1 font-medium">Giá vé thường</span>
+                <div class="border rounded-lg px-4 py-2 bg-gray-50" id="commonFare"></div>
+            </div>
+
+            <div class="flex flex-col">
+                <span class="mb-1 font-medium">Giá vé thương gia</span>
+                <div class="border rounded-lg px-4 py-2 bg-gray-50" id="vipFare"></div>
+            </div>
+
+            <div class="col-span-2 mt-4 p-4 bg-amber-50 rounded-xl">
+                <h3 class="font-semibold text-lg mb-3 text-center">Thống kê vé</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-yellow-100 p-3 rounded-lg">
+                        <p class="font-medium text-sm">Vé thương gia</p>
+                        <div class="flex justify-between mt-2">
+                            <span>Đã đặt: <span id="vip-booked" class="font-semibold">0</span></span>
+                            <span>Còn trống: <span id="vip-available" class="font-semibold">0</span></span>
+                        </div>
                     </div>
-                    <div class="text-sm">
-                        Số ghế phổ thông: <span id="economy-seat-count" class="font-semibold">0</span>
-                    </div>
-                    <div class="text-sm">
-                        Tổng số ghế: <span id="total-seat-count" class="font-semibold">0</span>
+                    <div class="bg-blue-100 p-3 rounded-lg">
+                        <p class="font-medium text-sm">Vé phổ thông</p>
+                        <div class="flex justify-between mt-2">
+                            <span>Đã đặt: <span id="economy-booked" class="font-semibold">0</span></span>
+                            <span>Còn trống: <span id="economy-available" class="font-semibold">0</span></span>
+                        </div>
                     </div>
                 </div>
             </div>
-
-
+        </div>
+        <div
+            class="ml-4 mt-8 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200 pr-4 max-h-4/5">
+            <div id="tickets-list" class="flex flex-col gap-4">
+                <!-- Danh sách vé sẽ được điền bằng JavaScript -->
+            </div>
         </div>
     </div>
 

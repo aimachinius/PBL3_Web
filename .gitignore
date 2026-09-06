@@ -18,6 +18,8 @@ target/
 *.iws
 *.iml
 *.ipr
+##
+node_modules/
 
 ### NetBeans ###
 /nbproject/private/
@@ -32,3 +34,7 @@ build/
 ### VS Code ###
 .vscode/
 /Backend/src/main/resources/application.properties
+
+# Ignore only frontend package files
+# frontend/package.json
+# frontend/package-lock.json

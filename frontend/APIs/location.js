@@ -7,7 +7,8 @@ const LOCATION_CONTROLLER_API = BASE_URL +  '/location';
 export async function getAllLocation() {
     try {
         const response = await fetch(LOCATION_CONTROLLER_API + '/all_location' , {
-            method: "GET"
+            method: "GET",
+            credentials: 'include'
         });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);

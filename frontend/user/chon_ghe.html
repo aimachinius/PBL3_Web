@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sơ đồ chỗ ngồi máy bay</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <style>
+        .seat {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .seat:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s;
+        }
+
+        .seat-selected {
+            background-color: #0f766e;
+            color: white;
+            border-color: #065f46;
+        }
+
+        .seat-available {
+            background-color: #e5e7eb;
+            color: #374151;
+            border-color: #d1d5db;
+        }
+
+        .seat-occupied {
+            background-color: #fef3c7;
+            color: #92400e;
+            border-color: #f59e0b;
+        }
+
+        .seat-blocked {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border-color: #ef4444;
+        }
+
+        .seat-exit {
+            background-color: #dcfce7;
+            color: #166534;
+            border-color: #16a34a;
+        }
+
+        .seat-window {
+            background-color: #dbeafe;
+            color: #1d4ed8;
+            border-color: #3b82f6;
+        }
+
+        .seat-free {
+            background-color: #f3f4f6;
+            color: #6b7280;
+            border-color: #9ca3af;
+        }
+
+        .seat-unavailable {
+            background-color: gray;
+            color: #d1d5db;
+            position: relative;
+        }
+
+        .seat-unavailable::before {
+            content: '✕';
+            font-size: 16px;
+            color: #9ca3af;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #0891b2;
+            color: white;
+            font-size: 10px;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .xl-badge {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            background-color: #7c3aed;
+            color: white;
+            font-size: 8px;
+            padding: 1px 3px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 p-4">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+
+        <div class="bg-teal-700 text-white text-center">
+            <div class="flex items-center justify-around gap-1" id="title-work-space">
+
+                
+
+            </div>
+        </div>
+
+        <!-- Header -->
+        <div class="bg-white text-black text-center">
+            <div class="flex items-center justify-around gap-1" id="table-customer">
+
+
+            </div>
+
+        </div>
+
+        <!-- Aircraft Type -->
+        <div class="text-center py-2 bg-gray-100 text-sm font-medium text-gray-600">
+            AIRBUS A321
+        </div>
+
+        <div class="flex">
+            <!-- Legend -->
+            <div class="w-80 bg-teal-700 text-white p-4">
+                <h3 class="font-bold text-lg mb-4">Chú thích sơ đồ chỗ ngồi</h3>
+
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="seat seat-selected">
+                            <div class="text-sm">AB</div>
+                        </div>
+                        <span class="text-sm">Chỗ đã chọn</span>
+
+                    </div>
+
+
+
+                    <div class="flex items-center gap-3">
+                        <div class="seat seat-blocked">
+                        </div>
+                        <div class="text-sm">Chỗ không phù hợp với vé</div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="seat seat-free">
+                        </div>
+                        <div class="text-sm">Chỗ miễn phí</div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="seat seat-unavailable">
+                        </div>
+                        <div class="text-sm">Chỗ không còn trống</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seating Chart -->
+            <div class="flex-1 p-6">
+                <!-- Aircraft Direction -->
+                <div class="text-center mb-4">
+                    <div class="inline-flex items-center gap-2 text-sm text-gray-600">
+                        <span>↑</span>
+                        <span class="font-medium">Đầu máy bay</span>
+                        <span>↑</span>
+                    </div>
+                </div>
+                <div id="view-map-seat-content-container"
+                    class="flex flex-col items-center w-full max-w-xl max-h-4/5 ml-3 h-full rounded-2xl p-4">
+
+
+
+                    <div id="seat-map-container" class="w-full h-full overflow-auto"></div>
+                    <!-- Header chữ cái -->
+                    <!-- <div class="flex w-full mb-4">
+                        <div class="w-10"></div> Cột trống để cân số hàng -->
+                    <!-- <div id="header-seat-map" class=" flex justify-around flex-1 w-full">
+                        </div>
+                    </div> -->
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-center gap-5 mt-4 items-center">
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-md change-work-space-button"
+            onclick="changeWorkSpace('departure')">Chuyến bay đi</button>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-md change-work-space-button"
+            onclick="changeWorkSpace('return')">Chuyến bay về</button>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-md complete-button" onclick="completeSelectSeat()">Hoàn
+            tất</button>
+    </div>
+    </div>
+
+    <!-- <script>
+        // Add click functionality to seats
+        document.querySelectorAll('.seat').forEach(seat => {
+            seat.addEventListener('click', function () {
+                if (!this.classList.contains('seat-unavailable') && !this.classList.contains('seat-occupied')) {
+                    // Remove selection from other seats
+                    document.querySelectorAll('.seat-selected').forEach(s => {
+                        s.classList.remove('seat-selected');
+                        s.classList.add('seat-available');
+                    });
+
+                    // Select this seat
+                    this.classList.remove('seat-available');
+                    this.classList.add('seat-selected');
+                }
+            });
+        });
+    </script> -->
+    <script type="module" src="js/DOM/chon_ghe.js"></script>
+</body>
+
+</html>
